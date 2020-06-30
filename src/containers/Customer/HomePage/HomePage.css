@@ -1,0 +1,14 @@
+.banner {
+	height: 400px;
+	display: flex;
+	align-items: center;
+    padding-left: 75px;
+    padding-bottom: 30px;
+}
+
+.set-bg {
+	background-repeat: no-repeat;
+	background-size: cover;
+    background-position: top center;
+    background-image: url(../../../img/banner-1.jpg);
+}

@@ -1,0 +1,234 @@
+.add_border {
+    border: 1px solid #d1d5da;
+    margin-top: 15px;
+    margin-bottom: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.add_shadow {
+	position: relative;
+	padding: 40px 30px;
+	box-shadow: 4px 4px 10px 4px rgba(0,0,0,0.2);
+}
+
+.img_container {
+    text-align: center;
+}
+
+.img_container .react-multi-carousel-dot-list {
+    padding-top: 15px;
+    position: relative;
+}
+.product_title {
+    position: relative;
+    display: block;
+}
+
+.product_title p.name{
+    font-size: 26px;
+    font-weight: bold;
+    color: #0d5cc4e5;
+}
+
+.product_title p .producer{
+    font-size: 26px;
+    font-weight: bold;
+    color: #0d5cc4e5 !important;
+}
+
+p.price_secondary {
+    font-size: 23px;
+    font-weight: 400;
+    color: #6c757d;
+}
+.add_line_after::after {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    height: 1px;
+    width: 90%;
+    background-color: #a5a2a2;
+}
+
+.description {
+    padding-top: 10px;
+}
+.product_price {
+    padding-top: 10px;
+}
+.product_price span{
+    color: #ff0405;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.in_stock {
+    font-size: 16px;
+}
+.in_stock span {
+    font-weight: bold;
+    color: #252525;
+    font-size: 20px;
+}
+.product_btns button {
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1.5px solid var(--btn-color);
+    background-color: white;
+    margin-right: 20px;
+    padding: 5px 8px;
+    color: var(--btn-color);
+    font-size: 18px;
+    font-weight: 450;
+}
+.product_btns button:hover {
+    color: white;
+    background-color: var(--btn-color);
+    font-weight: 500;
+}
+.product_btns button.button-second {
+    --btn-color : var(--second-color);
+}
+.product_btns .button-main {
+    --btn-color : var(--main-color);
+}
+
+.product_btns {
+    padding-top: 10px;
+}
+
+.pro-qty {
+    margin-top: 10px;
+    display: inline-block;
+    height: 39.4px;
+	text-align: center;
+	background: #fff;
+    margin-right: 20px;
+    border-radius: 10px;
+    border: solid 1.5px #353434;
+    box-sizing: border-box;
+}
+
+.pro-qty .count {
+    position: relative;
+    display: inline-block;
+    height: 35px;    
+    width: 50px;
+    font-size: 18px;
+	color: #353434;
+	background: #fff;
+    text-align: center;
+    padding: 3px 0px;
+}
+
+.pro-qty .qtybtn {
+    height: 35px;
+    width: 40px;
+	font-size: 18px;
+	background-color: #fff;
+	cursor: pointer;
+    display: inline-block;
+    font-weight: bolder;
+    padding: 3px 0px ;
+}
+
+.pro-qty .inc {
+    color: #429a31;
+    border-bottom-right-radius: 9px;
+    border-top-right-radius: 9px;
+}
+
+.pro-qty .dec {
+    color: #e02d2d;
+    border-bottom-left-radius: 9px;
+    border-top-left-radius: 9px;
+}
+
+.pro-qty .count::after {
+    position: absolute;
+    right: 0px;
+    height: 80%;
+    width: .5px;
+    background-color: #777474;
+    content: '';
+}
+
+.pro-qty .count::before {
+    position: absolute;
+    left: 0px;
+    height: 80%;
+    width: 0.5px;
+    background-color: #777474;
+    content: '';
+}
+
+.product__details__tab {
+	padding-top: 85px;
+}
+
+.product__details__tab .nav-tabs {
+	border-bottom: none;
+	justify-content: center;
+    position: relative;
+    padding: 0px ;
+}
+
+.product__details__tab .nav-tabs:before {
+    z-index: -1;
+	position: absolute;
+	left: 0;
+	top: 12px;
+	height: 1px;
+	width: 45%;
+	background: #ebebeb;
+	content: "";
+}
+
+.product__details__tab .nav-tabs:after {
+    z-index: -1;
+	position: absolute;
+	right: 0;
+	top: 12px;
+	height: 1px;
+	width: 45%;
+	background: #ebebeb;
+	content: "";
+}
+
+.product__details__tab .nav-tabs li {
+	margin-bottom: 0;
+	margin-right: 65px;
+}
+
+.product__details__tab .nav-tabs li:last-child {
+	margin-right: 0;
+}
+
+.product__details__tab .nav-tabs li a {
+	font-size: 16px;
+	color: #999999;
+	font-weight: 700;
+	border: none;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	padding: 0;
+}
+
+.product__details__tab .product__details__tab__desc {
+	padding-top: 44px;
+}
+
+.product__details__tab .product__details__tab__desc h6 {
+	font-weight: 700;
+	color: #333333;
+	margin-bottom: 26px;
+}
+
+.product__details__tab .product__details__tab__desc p {
+	color: #666666;
+}
+
+.nav-item {
+    padding: 0px 4px;
+}

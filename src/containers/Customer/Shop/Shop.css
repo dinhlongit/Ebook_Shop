@@ -1,0 +1,19 @@
+ul{
+    list-style: none;
+  }
+
+
+  .shopping input {
+    position: absolute;
+    cursor: pointer;
+    height: 1.5em;
+    width: 1.5em;
+  }
+
+
+  .shopping label{
+    padding-left: 2em;
+    font-weight: bold;
+    font-style: normal;
+  }
+

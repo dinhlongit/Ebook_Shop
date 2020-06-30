@@ -1,0 +1,11 @@
+form.form_profile {
+    padding: 30px;
+    border: 2px solid #f19618;
+}
+.col-sm-8.order_Manage {
+    padding: 30px;
+    border: 2px solid #f19618;
+}
+.processBtn{
+    float: right;
+}
