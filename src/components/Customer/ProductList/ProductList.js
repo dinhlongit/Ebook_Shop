@@ -40,8 +40,8 @@ export default class ProductList extends Component {
                         swipeable={true}
                         draggable={true}
                         showDots={true}
-                         autoPlay={this.props.deviceType !== "mobile" ? true : false}
-                         autoPlaySpeed={3000}
+                    //     autoPlay={this.props.deviceType !== "mobile" ? true : false}
+                   //      autoPlaySpeed={3000}
                         renderDotsOutside = {true}
                         responsive={responsive}
                         infinite={true}

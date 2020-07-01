@@ -6,7 +6,6 @@ import { toastError,toastSuccess } from '../helpers/toastHelper';
 
 
 export const fetchCategoryProductRequest = (catID,pdcID,price1,price2,keyword,sort,limit, page) => {
-  //console.log(catID)
      return (dispatch) =>{
      return getCategoryProduct(catID,pdcID,price1,price2,keyword,sort,limit, page).then(res=>{
          const {status, data} = res;
@@ -26,9 +25,6 @@ export const fetchCategoryProduct = (data,totalPage) => {
   };
 };
 
-
-
-
 export const fetchSearchProductRequest = (keyword) => {
    return (dispatch) =>{
    return getProductByName(keyword).then(res=>{
@@ -40,7 +36,6 @@ export const fetchSearchProductRequest = (keyword) => {
 };
 
 export const fetchSearchProduct = data => {
-
 return {
  type: productConstants.FETCH_PRODUCT_SEARCH_SUCCESS,
  payload: {
@@ -48,8 +43,6 @@ return {
  },
 };
 };
-
-
 
 export const fetchDetailProductRequest = (id) => {
       return (dispatch) =>{
@@ -61,8 +54,6 @@ export const fetchDetailProductRequest = (id) => {
 
 };
 
-
-
 export const fetchDetailProduct = data => {
   return {
     type: productConstants.FETCH_DETAIL_PRODUCT_SUCCESS,
@@ -71,7 +62,6 @@ export const fetchDetailProduct = data => {
     },
   };
 };
-
 
 
 export const fetchListProduct = () => {
@@ -87,7 +77,6 @@ export const fetchListProductByCategory = (id) => {
     };
   };
 
-  
   export const fetchListProductSuccess = data => {
     
     return {

@@ -53,7 +53,7 @@ import {
             case ADD_PRODUCT_TO_CART:
                // const xx = action.payload.quantity = 1
                 
-               // console.log(xx)
+                console.log(updatedCart)
 
 
                 updatedCart = [...state.cart];

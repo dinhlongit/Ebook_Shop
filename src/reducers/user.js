@@ -5,10 +5,12 @@ import { routerMiddleware, push } from 'react-router-redux'
 import { browserHistory } from 'react-router'
 
 var userInfo = Cookie.getJSON("userInfo") || null;
+
 const initialState = {
     listUser:[{}],
     userEditing: null,
-    userSignin: userInfo 
+    userSignin: userInfo,
+    userUpdate : userInfo
   };
 
 
@@ -132,6 +134,7 @@ const initialState = {
         return { loading: true };
       case userConstants.USER_SIGNIN_SUCCESS:
         toastSuccess("Đăng nhập thành công !");
+        Cookie.set('userInfo', JSON.stringify(action.payload));
         return { loading: false, userInfo: action.payload };
       case userConstants.USER_SIGNIN_FAIL:
         toastSuccess("Tài Khoản Hoặc Mật Khẩu Sai !");
@@ -152,9 +155,29 @@ const initialState = {
       case userConstants.USER_REGISTER_REQUEST:
         return { loading: true };
       case userConstants.USER_REGISTER_SUCCESS:
-        
         return { loading: false, userInfo: action.payload };
       case userConstants.USER_REGISTER_FAIL:
+
+        return { loading: false, error: action.payload };
+      default: return state;
+    }
+  }
+
+
+  function userUpdateReducer(state = {}, action) {
+    switch (action.type) {
+      case userConstants.USER_UPDATE_REQUEST:
+        return { loading: true };
+    
+
+      case userConstants.USER_UPDATE_SUCCESS:
+        userInfo.name = action.payload.name;
+        userInfo.phone_number = action.payload.phone_number;
+        userInfo.address = action.payload.address;
+        userInfo.address_id = action.payload.address_id;
+        Cookie.set('userInfo', JSON.stringify(userInfo));
+        return { loading: false };
+      case userConstants.USER_UPDATE_FAIL:
 
         return { loading: false, error: action.payload };
       default: return state;
@@ -165,4 +188,4 @@ const initialState = {
 
 
   
-  export  {userReducer,userSigninReducer};
+  export  {userReducer,userSigninReducer,userUpdateReducer, userRegisterReducer };

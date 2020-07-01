@@ -4,15 +4,20 @@ import  {useState} from 'react';
 import {connect} from 'react-redux';
 import { SERVER_IMAGE } from '../../../constants'
 import './CartItem.css';
+import {priceformat} from '../../../constants/priceformat'
+
+
+
 const CartItem = (
     {
         name,
         price,
+        discount,
         description,
         quantity,
         id,
         photo,
-        dispatch
+        dispatch,
     }
 ) => {
     const [itemQuantity, setItemQuantity] = useState(quantity);
@@ -40,7 +45,7 @@ const CartItem = (
         }
 
     };
-
+ 
 
     return (
         <div className="row align-items-center mb-3">
@@ -56,7 +61,7 @@ const CartItem = (
             </div>
             <div className="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row product-quantity-container align-items-center">
                 <div className="col-6 col-sm-6 col-md-6 text-md-right" style={{paddingTop: '5px'}}>
-                    <h6><strong>{price}$ <span className="text-muted">x</span></strong></h6>
+                    <h6><strong>{price === undefined ? null : priceformat(price - (price* (discount/100)))} <span className="text-muted">x</span></strong></h6>
                 </div>
                 <div className="col-4 col-sm-4 col-md-4">
                     <div className="quantity">

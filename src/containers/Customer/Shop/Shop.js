@@ -93,9 +93,18 @@ const Shop = (props) => {
       <div className="list-group"  style={{paddingTop: '2.5rem'}}>
 
         <a href="#" className="list-group-item list-group-item-action active price">
-        Filter By Price
+        Sort By Price
         </a>
         <ul className="shopping">
+        <li><input type="radio"
+         onClick={(id) =>{
+          title = "Tất Cả";
+          handleListProduct('',pdcID,price1,price2,page,sort)}}
+         name="filterprice" 
+         className="checkmark" 
+         /><label>Tất Cả</label>
+         </li>
+
            <li><input type="radio"
               onClick={(id) =>{
                 setSort("asc"); 
@@ -126,6 +135,14 @@ const Shop = (props) => {
 
 
         <ul className="shopping">
+        <li><input type="radio"
+         onClick={(id) =>{
+          title = "Tất Cả";
+          handleListProduct('',pdcID,price1,price2,page,sort)}}
+         name="price" 
+         className="checkmark" 
+         /><label>Tất Cả</label>
+         </li>
         {
            
            listPrice ? listPrice.map(price => { 

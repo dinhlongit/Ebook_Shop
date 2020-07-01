@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { useDispatch } from 'react-redux';
 import Cookie from 'js-cookie';
+import { update } from "../../actions/user";
 import CartDetailPage from '../../containers/Customer/CartDetailPage/CartDetailPage';
 import './Profile.css';
 import CartItem from '../../components/Customer/CartItem/CartItem'
@@ -12,8 +13,9 @@ import CartItem from '../../components/Customer/CartItem/CartItem'
 var status ;
 function Profile(props) {
   
-    console.log(props.data)
-    var userSigin  = JSON.parse(Cookie.get('userInfo'));
+ 
+    var userSigin  = props.userLogin;
+ 
     const [full_name, settfull_name] = useState(userSigin ? userSigin.name : "");
     const [street, setstreet] = useState(userSigin ? userSigin.address : "");
     const [address_id, setaddress_id] = useState(userSigin ? userSigin.address_id : "");
@@ -41,27 +43,28 @@ function Profile(props) {
             status_id: props.data[i][j].status_id ,
             quantity : props.data[i][j].pivot.amount
           }
-           total += item.quantity * item.price;
+           total += item.quantity * (item.price - (item.price * (item.discount/100)));
            order.push(item);
      }
      order.push(total);
      order.push( props.data[i][props.data[i].length - 1 ].status)
      cartItems.push(order);
-     console.log(order)
-   }
    
+   }
+
    useEffect(() => { 
     
     const { orderActionCreators } = props;
     const { fetchListUserOrder } = orderActionCreators;
-    fetchListUserOrder(18);
+    fetchListUserOrder(userSigin.id);
     }, [])
 
    const dispatch = useDispatch();
    const submitHandler = (e) => {
     e.preventDefault();
-    console.log({full_name,street,address_id,email,phone_number})
-    
+    const name = full_name;
+    const address = street;
+    dispatch(update({name,address,address_id,email,phone_number},userSigin.id))
   }
 
 
@@ -88,7 +91,7 @@ function Profile(props) {
 
         <div className="form-group">
           <label htmlFor="exampleInputPassword1"><b>Email</b></label>
-          <input value = {userSigin ? userSigin.email : ""} type="text" className="form-control" id="email" name="email"  onChange={(e) => setstreet(e.target.value)}/>
+          <input value = {userSigin ? userSigin.email : ""} type="text" className="form-control" id="email" name="email"  onChange={(e) => setstreet(e.target.value)} readOnly/>
         </div>
 
         <div className="form-group">
@@ -144,11 +147,13 @@ function Profile(props) {
 const mapStateToProps = (state) => {
   return {
     data: state.order.listUserOrder,
+    userLogin: state.user.userUpdate,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     orderActionCreators: bindActionCreators(orderActions, dispatch),
+    updateUser : (user,id) => dispatch(update(user,id))
   };
 };
 

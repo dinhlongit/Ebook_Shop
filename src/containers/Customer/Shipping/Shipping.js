@@ -16,7 +16,6 @@ function Shipping(props) {
 
    const dispatch = useDispatch();
    var info = {full_name,street,address_id, phone_number};
-   console.log(props.userSigin);
 
    if (props.userSigin){
       info.user_id = props.userSigin.id;

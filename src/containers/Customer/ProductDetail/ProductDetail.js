@@ -16,6 +16,8 @@ import ReactStars from "react-rating-stars-component";
 import { toastError,toastSuccess } from '../../../helpers/toastHelper';
 import  UserReview   from '../../../components/Customer/UserReview/UserReview';
 import FormReview from '../../../components/Customer/FormReview/FormReview';
+import {priceformat} from '../../../constants/priceformat'
+
 
 class ProductDetailPage extends Component {
     constructor(props) {
@@ -81,8 +83,9 @@ class ProductDetailPage extends Component {
     render() {
          
         const {data} = this.props;
+    
         const { id, name, photo, description, amount, price, discount, information, producer, category, rating, amount_rating} = data;
-       
+
         const responsive = {
             desktop: {
                 breakpoint: { max: 3000, min: 1024 },
@@ -123,6 +126,7 @@ class ProductDetailPage extends Component {
                             <img src={`${SERVER_IMAGE}${photo}`} className="img-fluid" alt="product" />
                             <img src={`${SERVER_IMAGE}${photo}` } className="img-fluid" alt="product" />
                         </Carousel>
+               
                     </div>
                     <div className="col-10 mx-auto col-md-6 my-3">
                         <div className='col-lg-12 col-10 product_title add_line_after'>
@@ -143,7 +147,10 @@ class ProductDetailPage extends Component {
                         </div>
                         <div className='col-lg-12 col-10 product_price'>
                             <p className='text-muted price_secondary'>
-                                Giá : <span>${price}</span>
+                                Giá :
+                                <span className='price'>{price === undefined ? null : priceformat((price - (price * (discount/100))))}</span>
+                                <span className='price notdiscount'>{price === undefined ? null : priceformat(price)}</span>
+
                             </p>
                         </div>
                         <div className='col-lg-12 col-10 in_stock'>

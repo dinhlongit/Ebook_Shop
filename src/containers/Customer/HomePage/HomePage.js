@@ -5,16 +5,19 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import * as productActions from "../../../actions/product";
 
+
 class HomePage extends Component  {
     
     componentDidMount() {
         const { productActionCreators } = this.props;
-        const { fetchListProduct } = productActionCreators;
+        const { fetchListProduct,fetchCategoryProductRequest } = productActionCreators;
         fetchListProduct();
         
+
       }
 
     render() {
+       
         this.props.setdd(true);
         const {data} = this.props;
         let tmp_categories = []
@@ -37,10 +40,10 @@ class HomePage extends Component  {
                 <div className='row mt-5'>
                     <img src="https://ccbook.vn/wordpress/wp-content/uploads/2020/01/banner_ngang.png"></img>
                 </div>
-                  <ProductList  key={1} products={data} title="Sản Phẩm Khuyến Mãi" setdd={this.props.setdd}/>
-                  <ProductList  key={2} products={data} title="Sản Phẩm Mới" setdd={this.props.setdd}/>
-                  <ProductList   key={3} products={data} title="Bí quyết chinh phục điểm cao" setdd={this.props.setdd}/>
-                  <ProductList  key={4} products={data} title="CC Thần Tốc Luyện Đề" setdd={this.props.setdd}/>
+                  <ProductList  key={1} products={data.filter(item => item.discount > 0)} title="Sản Phẩm Khuyến Mãi" setdd={this.props.setdd}/>
+                  <ProductList  key={2} products={data.filter(item => item.status_id == 3)} title="Sản Phẩm Mới" setdd={this.props.setdd}/>
+                  <ProductList   key={3} products={data.filter(item => item.category_id == 1)} title="Bí quyết chinh phục điểm cao" setdd={this.props.setdd}/>
+                  <ProductList  key={4} products={data.filter(item => item.category_id == 2)} title="CC thần tốc luyện đề 2020" setdd={this.props.setdd}/>
             </div>
         )
     }

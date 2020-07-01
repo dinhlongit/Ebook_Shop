@@ -3,8 +3,7 @@ import React, { Component } from 'react'
 import CartItem from '../../../components/Customer/CartItem/CartItem'
 import Shipping  from '../Shipping/Shipping'
 import './CartDetailPage.css'
-
-
+import {priceformat} from '../../../constants/priceformat'
 
 class CartDetailPage extends Component {
      
@@ -21,7 +20,7 @@ class CartDetailPage extends Component {
             cartInfor.push({
                 product_id : cart.id,
                 amount : cart.quantity,
-                price : cart.price
+                price : cart.price - (cart.price*(cart.discount/100))
 
             });
         })
@@ -52,7 +51,7 @@ class CartDetailPage extends Component {
                             <div className="card-footer">
                                 <div className="pull-right" style={{margin: '10px'}}>
                                     <div className="pull-right" style={{margin: '5px'}}>
-                                    <h3 className="totalCart">   Thành Tiền : {this.props.totalPrice} đ</h3>
+                                    <h3 className="totalCart">   Thành Tiền : {this.props.totalPrice === undefined ? null : priceformat(this.props.totalPrice)}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -72,7 +71,7 @@ class CartDetailPage extends Component {
 
 const mapStateToProps = state => {
 
-   // console.log(state, 'state has changed');
+    console.log(state, 'state has changed');
    
 
     return {
@@ -82,7 +81,7 @@ const mapStateToProps = state => {
              return count + curItem.quantity;
          }, 0),
         totalPrice: state.cart.cart.reduce((count, curItem) => {
-            return count + (curItem.price * curItem.quantity);
+            return count + ((curItem.price - curItem.price*(curItem.discount/100)) * curItem.quantity);
         }, 0)
     }
 }

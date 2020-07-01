@@ -39,8 +39,8 @@ class Main extends Component {
      
         const { categoryActionCreators } = this.props;
         const { fetchListCategory } = categoryActionCreators;
-
         fetchListCategory();
+
       }
     
     toggleDropDown = () => {
@@ -232,6 +232,7 @@ class Main extends Component {
 const mapStateToProps = (state) => {
     return {
       data: state.category.listCategory.data,
+    
       userSignin : state.user.userSignin,
       cartItems: state.cart.cart,
       cartItemCount: state.cart.cart.reduce((count, curItem) => {

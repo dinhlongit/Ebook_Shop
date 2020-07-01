@@ -9,7 +9,7 @@ import roleReducer from './role';
 import orderReducer from './order';
 import producerReducer from './producer';
 import cartReducer from './cart';
-import {userReducer, userSigninReducer} from "./user";
+import {userReducer, userSigninReducer,userRegisterReducer, userUpdateReducer} from "./user";
 import reviewReducer from './review';
 
 
@@ -25,6 +25,8 @@ const rootReducer = combineReducers({
   user:userReducer,
   review:reviewReducer,
   userSignin : userSigninReducer,
+  userRegister : userRegisterReducer,
+  userUpdate : userUpdateReducer,
   modal: modalReducer,
   role:roleReducer,
   order:orderReducer,

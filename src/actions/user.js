@@ -20,7 +20,7 @@ export const signin = (user) => async (dispatch) => {
     const { data } = await Axios.post("http://127.0.0.1:8000/api/auth/login", user);
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
  
-    Cookie.set('userInfo', JSON.stringify(data));
+  //  Cookie.set('userInfo', JSON.stringify(data));
     browserHistory.push('/')
     window.location.reload(); 
 
@@ -36,10 +36,26 @@ export const register = (user) => async (dispatch) => {
     const { data } = await Axios.post("http://127.0.0.1:8000/api/auth/register", user );
     toastSuccess("Đăng Ký thành công !");
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
-   // Cookie.set('userInfo', JSON.stringify(data));
+ 
   } catch (error) {
     toastSuccess("Đăng Ký không thành công !");
     dispatch({ type: USER_REGISTER_FAIL, payload: error.message });
+  }
+}
+
+
+export const update = (user,id) => async (dispatch) => {
+  console.log(user)
+  dispatch({ type: USER_UPDATE_REQUEST, payload: user });
+  try {
+    const { data } = await Axios.post("http://127.0.0.1:8000/api/auth/update/"+id, user );
+
+    toastSuccess("Cập Nhật Thông Tin thành công !");
+    dispatch({ type: USER_UPDATE_SUCCESS, payload: data });
+   
+  } catch (error) {
+    toastSuccess("Cập Nhật Thông Tin không thành công !");
+    dispatch({ type: USER_UPDATE_FAIL, payload: error.message });
   }
 }
 
