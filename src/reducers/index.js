@@ -9,8 +9,10 @@ import roleReducer from './role';
 import orderReducer from './order';
 import producerReducer from './producer';
 import cartReducer from './cart';
+import statusReducer from './status';
 import {userReducer, userSigninReducer,userRegisterReducer, userUpdateReducer} from "./user";
 import reviewReducer from './review';
+import productstatusReducer from './productstatus';
 
 
 
@@ -31,7 +33,9 @@ const rootReducer = combineReducers({
   role:roleReducer,
   order:orderReducer,
   producer: producerReducer,
-  cart : cartReducer
+  cart : cartReducer,
+  status:statusReducer,
+  productstatus:productstatusReducer
 });
 
 export default rootReducer;

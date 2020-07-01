@@ -62,9 +62,10 @@ const initialState = {
           const { data } = action.payload;
           console.log(data);
           toastSuccess('Thêm mới producer thành công');
+          window.location.reload();
           return {
             ...state,
-            listProducer: state.listProducer.concat([data]),
+            //listProducer: state.listProducer.concat([data]),
           };
           //return Object.assign({},state,{ listProducer : data})
         }
@@ -89,20 +90,8 @@ const initialState = {
         }
         case producerConstants.UPDATE_PRODUCER_SUCCESS: {
           const { data } = action.payload;
-          const { listProducer } = state;
-          const index = listProducer.findIndex(item => item.id === data.id);
-          if (index !== -1) {
-            const newList = [
-              ...listProducer.slice(0, index),
-              data,
-              ...listProducer.slice(index + 1),
-            ];
-            toastSuccess('Cập nhật producer thành công');
-            return {
-              ...state,
-              listProducer: newList,
-            };
-          }
+          toastSuccess('Cập nhật producer thành công');
+          window.location.reload();
           return {
             ...state,
           };

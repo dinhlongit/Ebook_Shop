@@ -5,7 +5,13 @@ import { browserHistory } from 'react-router'
 const initialState = {
     listOrder:[{}],
     orderEditing: null,
-    listUserOrder: [] 
+    listUserOrder: [],
+    listOrderById: [
+      {
+        pivot: {},
+      },
+    ],
+    page:''
   };
   
   const reducer = (state = initialState, action) => {
@@ -29,6 +35,7 @@ const initialState = {
         return {
           ...state,
           listOrder: data,
+          page:data.current_page
         };
       }
       case orderConstants.FETCH_ORDER_FAILED: {
@@ -39,6 +46,30 @@ const initialState = {
           listOrder: [],
         };
       }
+
+       //==
+
+    case orderConstants.FETCH_ORDER_BYID: {
+      return {
+        ...state,
+      };
+    }
+    case orderConstants.FETCH_ORDER_SUCCESS_BYID: {
+      const { data } = action.payload;
+      console.log(data);
+      return {
+        ...state,
+        listOrderById: data,
+      };
+    }
+    case orderConstants.FETCH_ORDER_FAILED_BYID: {
+      const { error } = action.payload;
+      toastError(error);
+      return {
+        ...state,
+        listOrderById: [],
+      };
+    }
 
       //delete
       case orderConstants.DELETE_ORDER: {

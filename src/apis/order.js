@@ -4,8 +4,10 @@ import { API_ENDPOINT } from '../constants';
 const url = 'orders';
 const users = 'users'
 
-export const getList = () => {
-  return axiosService.get(`${API_ENDPOINT}/${url}`);
+const limit = 3;
+
+export const getList = (page) => {
+  return axiosService.get(`${API_ENDPOINT}/${url}?limit=${limit}&page=${page}`);
 };
 
 export const addOrder = data => {
@@ -26,4 +28,8 @@ export const submitOrder = data => {
 
 export const userOrder = user_id => {
   return axiosService.get(`${API_ENDPOINT}/${users}/${user_id}/${url}`);
+};
+
+export const getListById = (orderId) => {
+  return axiosService.get(`${API_ENDPOINT}/${url}/${orderId}`);
 };

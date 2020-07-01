@@ -72,9 +72,12 @@ export const logout = () => (dispatch) => {
 
 
 
-export const fetchListUser = () => {
+export const fetchListUser = (page) => {
   return {
     type: userConstants.FETCH_USER,
+    payload: {
+      page,
+    },
   };
 };
 

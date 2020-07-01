@@ -1,40 +1,45 @@
 import React, { Component } from "react";
 
-class RoleItem extends Component {
-
-    onClickDelete = (role) => {
-        this.props.onClickDelete(role);
-      };
-
+class CategoryItem extends Component {
+  onClickDelete = (category) => {
+    this.props.onClickDelete(category);
+  };
+  onClickEdit=(category)=>{
+    this.props.onClickEdit(category);
+  }
   render() {
-    const { role } = this.props;
+    const { category } = this.props;
     const {
       id,
-      name
-    } = role;
+      name,   
+      parrent_id
+    } = category;
+
     return (
       <tr>
         <td>{id}</td>
-        <td>{name}</td>
-        {/* <td>
+        <td>{name}</td>      
+        <td>{parrent_id}</td>      
+      
+        <td>
           <div className="btn-group float-right">
             <button
               className="btn btn-outline-danger"
-              onClick={() => this.onClickDelete(role)}
+              onClick={() => this.onClickDelete(category)}
             >
               <i className="fas fa-trash-alt"></i>
             </button>
             <button
               className="btn btn-outline-info"
-              onClick={() => this.onClickEdit(role)}
+              onClick={() => this.onClickEdit(category)}
             >
               <i className="fas fa-edit"></i>
             </button>
           </div>
-        </td> */}
+        </td>
       </tr>
     );
   }
 }
 
-export default RoleItem;
+export default CategoryItem;

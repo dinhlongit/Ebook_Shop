@@ -56,25 +56,11 @@ export const deleteProducerFailed = (error) => {
 
 export const addProducer = (
   name,
-  phone_number,
-  email,
-  birthday,
-  password,
-  address,
-  address_id,
-  roles
 ) => {
   return {
     type: producerConstants.ADD_PRODUCER,
     payload: {
       name,
-      phone_number,
-      email,
-      birthday,
-      password,
-      address,
-      address_id,
-      roles,
     },
   };
 };
@@ -108,25 +94,11 @@ export const setProducerEditing = (user) => {
 
 export const updateProducer = (
   name,
-  phone_number,
-  email,
-  birthday,
-  password,
-  address,
-  address_id,
-  roles
 ) => {
   return {
     type: producerConstants.UPDATE_PRODUCER,
     payload: {
       name,
-      phone_number,
-      email,
-      birthday,
-      password,
-      address,
-      address_id,
-      roles,
     },
   };
 };

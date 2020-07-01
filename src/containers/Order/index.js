@@ -4,12 +4,13 @@ import { bindActionCreators } from "redux";
 import * as orderActions from "./../../actions/order";
 import * as modalActions from "./../../actions/modal";
 import OrderItem from "../../components/OrderItem";
+import OrderById from "../OrderById";
 
 class Order extends Component {
   componentDidMount() {
     const { orderActionCreators } = this.props;
     const { fetchListOrder } = orderActionCreators;
-    fetchListOrder();
+    fetchListOrder(1);
   }
 
   showModalDeleteOrder = (order) => {
@@ -52,8 +53,34 @@ class Order extends Component {
     deleteOrder(id);
   }
 
+  showModalOrder = (order) =>{
+    const { orderActionCreators } = this.props;
+    const { fetchListOrderById } = orderActionCreators;
+    fetchListOrderById(order.id);
+    const { modalActionCreators } = this.props;
+    const {
+      showModal,
+      changeModalTitle,
+      changeModalContent,
+    } = modalActionCreators;
+    showModal();
+    changeModalTitle(`chi tiết order ${order.id}`);
+    changeModalContent(
+   
+      <OrderById/>
+    );
+  }
+
+
   renderOrder = () => {
-    const { data } = this.props;
+    let data = this.props.data.data;
+    
+    console.log(data)
+
+    if (data === undefined) {
+      data = [];
+    }
+
     let xhtml = null;
     xhtml = data.map((order, index) => {
       return (
@@ -61,11 +88,45 @@ class Order extends Component {
           key={index}
           order={order}
           onClickDelete={this.showModalDeleteOrder}
+          onClickOrder={this.showModalOrder}
         />
       );
     });
     return xhtml;
   };
+
+  renderPage = () => {
+    let xhtml = null;
+    const totalPage = [];
+    for (let i = 1; i <= this.props.data.last_page; i++) {
+      totalPage.push(i);
+    }
+    xhtml = totalPage.map((index) => {
+      return (
+        <li key={index} className="page-item">
+          <button
+            className="page-link"
+            name="page"
+            onClick={(e) => {
+              this.handlePaginate(index);
+            }}
+          >
+            {index}
+          </button>
+        </li>
+      );
+    });
+    return xhtml;
+  };
+
+  handlePaginate = (page) => {
+    console.log(page);
+    const { orderActionCreators } = this.props;
+    const { fetchListOrder } = orderActionCreators;
+    fetchListOrder(page);
+  };
+
+
 
   render() {
     const { data } = this.props;
@@ -111,6 +172,40 @@ class Order extends Component {
                   <tbody>{this.renderOrder()}</tbody>
                 </table>
               </div>
+
+              <nav aria-label="Page navigation example">
+                <ul className="pagination">
+                  <li className="page-item">
+                    <button
+                      className="page-link"
+                      onClick={(e) => {
+                        this.handlePaginate(
+                          parseInt(this.props.data.current_page) - 1
+                        );
+                      }}
+                    >
+                      <span aria-hidden="true">«</span>
+                    </button>
+                  </li>
+
+                  {this.renderPage()}
+
+                  <li className="page-item">
+                    <a
+                      className="page-link"
+                      onClick={(e) => {
+                        this.handlePaginate(
+                          parseInt(this.props.data.current_page) + 1
+                        );
+                      }}
+                    >
+                      <span aria-hidden="true">»</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+
+
             </div>
           </div>
         </div>

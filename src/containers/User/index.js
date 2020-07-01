@@ -10,7 +10,7 @@ class User extends Component {
   componentDidMount() {
     const { userActionCreators } = this.props;
     const { fetchListUser } = userActionCreators;
-    fetchListUser();
+    fetchListUser(1);
   }
 
   openForm = () => {
@@ -23,8 +23,8 @@ class User extends Component {
       changeModalContent,
     } = modalActionCreators;
     showModal();
-    changeModalTitle('Thêm mới user');
-    changeModalContent(<UserForm/>);
+    changeModalTitle("Thêm mới user");
+    changeModalContent(<UserForm />);
   };
 
   showModalEditUser = (user) => {
@@ -37,9 +37,9 @@ class User extends Component {
       changeModalContent,
     } = modalActionCreators;
     showModal();
-    changeModalTitle('Cập nhật user');
+    changeModalTitle("Cập nhật user");
     changeModalContent(<UserForm />);
-  }
+  };
 
   showModalDeleteUser = (user) => {
     const { modalActionCreators } = this.props;
@@ -82,7 +82,15 @@ class User extends Component {
   }
 
   renderUser = () => {
-    const { data } = this.props;
+    let data = this.props.data.data;
+    
+    console.log(data)
+
+    if (data === undefined) {
+      data = [];
+    }
+
+    
     let xhtml = null;
     xhtml = data.map((user, index) => {
       return (
@@ -96,6 +104,39 @@ class User extends Component {
     });
     return xhtml;
   };
+
+
+  renderPage = () => {
+    let xhtml = null;
+    const totalPage = [];
+    for (let i = 1; i <= this.props.data.last_page; i++) {
+      totalPage.push(i);
+    }
+    xhtml = totalPage.map((index) => {
+      return (
+        <li key={index} className="page-item">
+          <button
+            className="page-link"
+            name="page"
+            onClick={(e) => {
+              this.handlePaginate(index);
+            }}
+          >
+            {index}
+          </button>
+        </li>
+      );
+    });
+    return xhtml;
+  };
+
+  handlePaginate = (page) => {
+    console.log(page);
+    const { userActionCreators } = this.props;
+    const { fetchListUser } = userActionCreators;
+    fetchListUser(page);
+  };
+
 
   render() {
     return (
@@ -111,7 +152,11 @@ class User extends Component {
           </ol>
 
           <div className="card mb-2" />
-          <button type="button" className="btn btn-primary mb-2"  onClick={this.openForm}>
+          <button
+            type="button"
+            className="btn btn-primary mb-2"
+            onClick={this.openForm}
+          >
             <i className="fas fa-user-plus"></i>
           </button>
           <div className="card mb-2">
@@ -126,12 +171,8 @@ class User extends Component {
                     <tr>
                       <th>id</th>
                       <th>name</th>
-                      <th>phone_number</th>
                       <th>email</th>
-                      <th>address</th>
-                      <th>profile_photo</th>
                       <th>birthday</th>
-                      <th>address_id</th>
                       <th>role</th>
                       <th>Action</th>
                     </tr>
@@ -139,6 +180,38 @@ class User extends Component {
                   <tbody>{this.renderUser()}</tbody>
                 </table>
               </div>
+              <nav aria-label="Page navigation example">
+                <ul className="pagination">
+                  <li className="page-item">
+                    <button
+                      className="page-link"
+                      onClick={(e) => {
+                        this.handlePaginate(
+                          parseInt(this.props.data.current_page) - 1
+                        );
+                      }}
+                    >
+                      <span aria-hidden="true">«</span>
+                    </button>
+                  </li>
+
+                  {this.renderPage()}
+
+                  <li className="page-item">
+                    <a
+                      className="page-link"
+                      onClick={(e) => {
+                        this.handlePaginate(
+                          parseInt(this.props.data.current_page) + 1
+                        );
+                      }}
+                    >
+                      <span aria-hidden="true">»</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+
             </div>
           </div>
         </div>

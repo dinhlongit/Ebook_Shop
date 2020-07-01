@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import * as producerActions from "./../../actions/producer";
 import * as modalActions from "./../../actions/modal";
 import ProducerItem from "../../components/ProducerItem";
+import ProducerForm from "../ProducerForm";
 
 class Role extends Component {
   componentDidMount() {
@@ -11,6 +12,22 @@ class Role extends Component {
     const { fetchListProducer } = producerActionCreators;
     fetchListProducer();
   }
+
+
+  openForm = () => {
+    const { modalActionCreators, userActionCreators } = this.props;
+    //const { setTaskEditing } = userActionCreators;
+    // setTaskEditing(null);
+    const {
+      showModal,
+      changeModalTitle,
+      changeModalContent,
+    } = modalActionCreators;
+    showModal();
+    changeModalTitle("Thêm mới producer");
+    changeModalContent(<ProducerForm />);
+  };
+
 
   showModalDeleteProducer = (producer) => {
     const { modalActionCreators } = this.props;
@@ -44,6 +61,22 @@ class Role extends Component {
       </div>
     );
   };
+  
+  showModalEditProducer = (producer) => {
+    console.log(producer);
+    const { producerActionCreators, modalActionCreators } = this.props;
+    const { setProducerEditing } = producerActionCreators;
+    setProducerEditing(producer);
+    const {
+      showModal,
+      changeModalTitle,
+      changeModalContent,
+    } = modalActionCreators;
+    showModal();
+    changeModalTitle("Cập nhật producer");
+    changeModalContent(<ProducerForm />);
+  };
+
 
   handleDeleteProducer(producer) {
     const { id } = producer;
@@ -61,6 +94,8 @@ class Role extends Component {
           key={index}
           producer={producer}
           onClickDelete={this.showModalDeleteProducer}
+          onClickEdit={this.showModalEditProducer}
+
         />
       );
     });
@@ -81,6 +116,14 @@ class Role extends Component {
             </li>
             <li className="breadcrumb-item active">Product</li>
           </ol>
+          <div className="card mb-2" />
+          <button
+            type="button"
+            className="btn btn-primary mb-2"
+            onClick={this.openForm}
+          >
+            <i className="fas fa-user-plus"></i>
+          </button>
           <div className="card mb-4">
             <div className="card-header">
               <i className="fas fa-table mr-1" />

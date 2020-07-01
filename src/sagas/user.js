@@ -2,27 +2,24 @@ import {
   call,
   delay,
   put,
+  select,
   takeEvery,
   takeLatest,
-  select,
 } from "redux-saga/effects";
-import {
-  fetchListUserSuccess,
-  fetchListUserFailed,
-  deleteUserSuccess,
-  deleteUserFailed,
-  addUserSuccess,
-  addUserFailed,
-  updateUserSuccess,
-  updateUserFailed,
-} from "../actions/user";
-
-
 import { hideModal } from "../actions/modal";
 import { hideLoading, showLoading } from "../actions/ui";
-import { getList, deleteUser, addUser, updateUser } from "../apis/user";
-import * as userTypes from "../constants/user";
+import {
+  addUserFailed,
+  deleteUserFailed,
+  fetchListUser,
+  fetchListUserFailed,
+  fetchListUserSuccess,
+  updateUserFailed,
+} from "../actions/user";
+import { addUser, deleteUser, getList, updateUser } from "../apis/user";
 import { STATUS_CODE } from "../constants";
+import * as userTypes from "../constants/user";
+import { toastSuccess } from "../helpers/toastHelper";
 
 export function* user_saga() {
   yield takeEvery(userTypes.FETCH_USER, wacthFetchListUser);
@@ -32,8 +29,9 @@ export function* user_saga() {
 }
 
 function* wacthFetchListUser(action) {
+  console.log(action.payload.page);
   yield put(showLoading());
-  const resp = yield call(getList);
+  const resp = yield call(getList, action.payload.page);
   const { status, data } = resp;
   if (status === STATUS_CODE.SUCCESS) {
     yield put(fetchListUserSuccess(data));
@@ -45,76 +43,32 @@ function* wacthFetchListUser(action) {
 }
 
 function* watchDeleteUser({ payload }) {
-  console.log(payload);
-  const { id } = payload;
   yield put(showLoading());
-  const resp = yield call(deleteUser, id);
-  const { data, status: statusCode } = resp;
-  if (statusCode === STATUS_CODE.SUCCESS) {
-    yield put(deleteUserSuccess(id));
+  try {
+    console.log(payload);
+    const { id } = payload;
+    yield put(showLoading());
+    const resp = yield call(deleteUser, id);
+    const page = yield select((state) => state.user.page);
+    toastSuccess("Xóa user thành công");
+    yield put(fetchListUser(page));
     yield put(hideModal());
-  } else {
-    yield put(deleteUserFailed(data));
+  } catch (e) {
+    yield put(deleteUserFailed(e));
+  } finally {
+    yield delay(0);
+    yield put(hideLoading());
   }
-  yield delay(1000);
-  yield put(hideLoading());
 }
 
 function* watchAddUser({ payload }) {
-  const {
-    name,
-    email,
-    phone_number,
-    birthday,
-    password,
-    address
-  } = payload;
-
-  const roles = parseInt(payload.roles);
-  const address_id = parseInt(payload.address_id);
-
   yield put(showLoading());
-  const resp = yield call(addUser, {
-    name,
-    phone_number,
-    email,
-    birthday,
-    password,
-    address,
-    address_id,
-    roles,
-  });
-  const { data, status } = resp;
- // console.log(resp);
-  if (status === STATUS_CODE.CREATED) {
-   // yield put(addUserSuccess(data.data));
-    yield put(hideModal());
-  } else {
-    yield put(addUserFailed(data));
-  }
-  yield delay(1000);
-  yield put(hideLoading());
-}
-
-function* watchUpdateUser({ payload }) {
-  console.log(payload);
-  const {
-    name,
-    email,
-    phone_number,
-    birthday,
-    password,
-    address,
-    address_id
-  } = payload;
-  const roles = parseInt(payload.roles);
-  // const address_id = parseInt(payload.address_id);
-  const userEditing = yield select((state) => state.user.userEditing);
-  console.log(userEditing.id);
-  yield put(showLoading());
-  const resp = yield call(
-    updateUser,
-    {
+  try {
+    const { name, email, phone_number, birthday, password, address } = payload;
+    const roles = parseInt(payload.roles);
+    const address_id = parseInt(payload.address_id);
+    yield put(showLoading());
+    const resp = yield call(addUser, {
       name,
       phone_number,
       email,
@@ -122,17 +76,53 @@ function* watchUpdateUser({ payload }) {
       password,
       address,
       address_id,
-      roles
-    },
-    userEditing.id
-  );
-  const { data, status: statusCode } = resp;
-  if (statusCode === STATUS_CODE.SUCCESS) {
-    yield put(updateUserSuccess(data));
+      roles,
+    });
+    const page = yield select((state) => state.user.page);
+    toastSuccess("Thêm mới user thành công");
+    yield put(fetchListUser(page));
     yield put(hideModal());
-  } else {
-    yield put(updateUserFailed(data));
+  } catch (e) {
+    yield put(addUserFailed(e));
+  } finally {
+    yield delay(0);
+    yield put(hideLoading());
   }
-  yield delay(1000);
-  yield put(hideLoading());
+}
+
+function* watchUpdateUser({ payload }) {
+  yield put(showLoading());
+  try {
+    console.log(payload);
+    const { name, email, phone_number, birthday, password, address } = payload;
+    const roles = parseInt(payload.roles);
+    console.log(roles);
+    const address_id = parseInt(payload.address_id);
+    const userEditing = yield select((state) => state.user.userEditing);
+    console.log(userEditing.id);
+    yield put(showLoading());
+    const resp = yield call(
+      updateUser,
+      {
+        name,
+        phone_number,
+        email,
+        birthday,
+        password,
+        address,
+        address_id,
+        roles,
+      },
+      userEditing.id
+    );
+    const page = yield select((state) => state.user.page);
+    toastSuccess("Update user thành công");
+    yield put(fetchListUser(page));
+    yield put(hideModal());
+  } catch (e) {
+    yield put(updateUserFailed(e));
+  } finally {
+    yield delay(0);
+    yield put(hideLoading());
+  }
 }

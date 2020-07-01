@@ -4,36 +4,19 @@ class UserItem extends Component {
   onClickDelete = (user) => {
     this.props.onClickDelete(user);
   };
-  onClickEdit=(user)=>{
+  onClickEdit = (user) => {
     this.props.onClickEdit(user);
-  }
+  };
   render() {
     const { user } = this.props;
-    const {
-      id,
-      name,
-      phone_number,
-      email,
-      address,
-      password,
-      profile_photo,
-      birthday,
-      address_id,
-      role,
-    } = user;
+    const { id, name, email, birthday, role } = user;
 
     return (
       <tr>
         <td>{id}</td>
-        <td>{name}</td>
-        <td>{phone_number}</td>
-        <td>{email}</td>
-        <td>{address}</td>
-    
-        <td>{profile_photo}</td>
+        <td>{name}</td> 
+        <td>{email}</td>    
         <td>{birthday}</td>
-        <td>{address_id}</td>
-    
         <td>{role}</td>
         <td>
           <div className="btn-group float-right">

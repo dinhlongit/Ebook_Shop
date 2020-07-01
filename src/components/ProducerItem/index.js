@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 
 class ProducerItem extends Component {
+  onClickDelete = (producer) => {
+    this.props.onClickDelete(producer);
+  };
 
-    onClickDelete = (producer) => {
-        this.props.onClickDelete(producer);
-      };
+  onClickEdit = (producer) => {
+    this.props.onClickEdit(producer);
+  };
 
   render() {
     const { producer } = this.props;
-    const {
-      id,
-      name
-    } = producer;
+    const { id, name } = producer;
     return (
       <tr>
         <td>{id}</td>

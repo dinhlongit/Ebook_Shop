@@ -4,6 +4,10 @@ import { toastError, toastSuccess } from '../helpers/toastHelper';
 const initialState = {
   listCategory:{status:'',message:'',data:[{children_categories:[{categories:[{}]}]}]},
   categoryEditing: null,
+  listCategoryAdmin: [{}],
+  listCategoryAdminFull: [{}],
+  listSubCategory: [{}],
+  page: "",
 };
 
 const reducer = (state = initialState, action) => {
@@ -28,6 +32,80 @@ const reducer = (state = initialState, action) => {
         listCategory: [],
       };
     }
+
+    ///==
+    case categoryConstants.FETCH_CATEGORY_ADMIN: {
+      return {
+        ...state,
+      };
+    }
+    case categoryConstants.FETCH_CATEGORY_SUCCESS_ADMIN: {
+      const { data } = action.payload;
+      return {
+        ...state,
+        listCategoryAdmin: data,
+        page: data.current_page,
+      };
+    }
+    case categoryConstants.FETCH_CATEGORY_FAILED_ADMIN: {
+      const { error } = action.payload;
+      toastError(error);
+      return {
+        ...state,
+        listCategoryAdmin: [],
+      };
+    }
+
+
+    ///
+
+    //
+    case categoryConstants.FETCH_SUBCATEGORY: {
+      return {
+        ...state,
+      };
+    }
+    case categoryConstants.FETCH_SUBCATEGORY_SUCCESS: {
+      const { data } = action.payload;
+      return {
+        ...state,
+        listSubCategory: data,
+      };
+    }
+    case categoryConstants.FETCH_SUBCATEGORY_FAILED: {
+      const { error } = action.payload;
+      toastError(error);
+      return {
+        ...state,
+        listSubCategory: [],
+      };
+    }
+    
+     //
+
+     case categoryConstants.FETCH_CATEGORY_ADMIN_FULL: {
+      return {
+        ...state,
+      };
+    }
+    case categoryConstants.FETCH_CATEGORY_SUCCESS_ADMIN_FULL: {
+      const { data } = action.payload;
+      return {
+        ...state,
+        listCategoryAdminFull: data,
+      };
+    }
+    case categoryConstants.FETCH_CATEGORY_FAILED_ADMIN_FULL: {
+      const { error } = action.payload;
+      toastError(error);
+      return {
+        ...state,
+        listCategoryAdminFull: [],
+      };
+    }
+
+    //
+    ///==
     case categoryConstants.FILTER_CATEGORY_SUCCESS: {
       const { data } = action.payload;
       return {
@@ -42,24 +120,25 @@ const reducer = (state = initialState, action) => {
     }
     case categoryConstants.ADD_CATEGORY_SUCCESS: {
       const { data } = action.payload;
-      toastSuccess('Thêm mới công việc thành công');
+      toastSuccess("Thêm mới category thành công");
+      window.location.reload();
       return {
         ...state,
-        listCategory: [data].concat(state.listCategory),
       };
     }
     case categoryConstants.ADD_CATEGORY_FAILED: {
-      const { error } = action.payload;
-      toastError(error);
+      toastError("Thêm mới category thất bại");
+      window.location.reload();
       return {
         ...state,
       };
     }
     case categoryConstants.SET_CATEGORY_EDITING: {
-      const { task } = action.payload;
+      const category = action.payload.user;
+
       return {
         ...state,
-        categoryEditing: task,
+        categoryEditing: category,
       };
     }
     case categoryConstants.UPDATE_CATEGORY: {
@@ -69,27 +148,17 @@ const reducer = (state = initialState, action) => {
     }
     case categoryConstants.UPDATE_CATEGORY_SUCCESS: {
       const { data } = action.payload;
-      const { listCategory } = state;
-      const index = listCategory.findIndex(item => item.id === data.id);
-      if (index !== -1) {
-        const newList = [
-          ...listCategory.slice(0, index),
-          data,
-          ...listCategory.slice(index + 1),
-        ];
-        toastSuccess('Cập nhật công việc thành công');
-        return {
-          ...state,
-          listCategory: newList,
-        };
-      }
+      toastError("Update category thành công");
+      window.location.reload();
       return {
         ...state,
+        categoryEditing: !state.categoryEditing,
       };
     }
+
     case categoryConstants.UPDATE_CATEGORY_FAILED: {
-      const { error } = action.payload;
-      toastError(error);
+      toastError("Update category thất bại");
+      window.location.reload();
       return {
         ...state,
       };
@@ -114,6 +183,30 @@ const reducer = (state = initialState, action) => {
         ...state,
       };
     }
+
+    //
+    case categoryConstants.FETCH_SUBCATEGORY: {
+      return {
+        ...state,
+      };
+    }
+    case categoryConstants.FETCH_SUBCATEGORY_SUCCESS: {
+      const { data } = action.payload;
+      return {
+        ...state,
+        listSubCategory: data,
+      };
+    }
+    case categoryConstants.FETCH_SUBCATEGORY_FAILED: {
+      const { error } = action.payload;
+      toastError(error);
+      return {
+        ...state,
+        listSubCategory: [],
+      };
+    }
+
+    
     default:
       return state;
   }

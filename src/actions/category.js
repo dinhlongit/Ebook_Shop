@@ -26,6 +26,65 @@ export const fetchListCategoryFailed = error => {
   };
 };
 
+//===
+
+export const fetchListCategoryAdmin = (page) => {
+  return {
+    type: categoryConstants.FETCH_CATEGORY_ADMIN,
+    payload: {
+      page,
+    },
+  };
+};
+
+export const fetchListCategoryAdminSuccess = data => {
+  return {
+    type: categoryConstants.FETCH_CATEGORY_SUCCESS_ADMIN,
+    payload: {
+      data,
+    },
+  };
+};
+
+export const fetchListCategoryAdminFailed = error => {
+  return {
+    type: categoryConstants.FETCH_CATEGORY_FAILED_ADMIN,
+    payload: {
+      error,
+    },
+  };
+};
+
+///===
+
+
+//==
+
+export const fetchListCategoryAdminFull = () => {
+  return {
+    type: categoryConstants.FETCH_CATEGORY_ADMIN_FULL,
+  };
+};
+
+export const fetchListCategorySuccessAdminFull = (data) => {
+  return {
+    type: categoryConstants.FETCH_CATEGORY_SUCCESS_ADMIN_FULL,
+    payload: {
+      data,
+    },
+  };
+};
+
+export const fetchListSubCategoryFailedAdminFull = (error) => {
+  return {
+    type: categoryConstants.FETCH_CATEGORY_FAILED_ADMIN_FULL,
+    payload: {
+      error,
+    },
+  };
+};
+
+//==
 
 //--------------------------------------------------------------------------------------------------
 
@@ -43,17 +102,18 @@ export const filterCategorySuccess = data => ({
   },
 });
 
-export const addCategory = (title, description) => {
+export const addCategory = (name, photo, parrent_id) => {
   return {
     type: categoryConstants.ADD_CATEGORY,
     payload: {
-      title,
-      description,
+      name,
+      photo,
+      parrent_id,
     },
   };
 };
 
-export const addCategorySuccess = data => {
+export const addCategorySuccess = (data) => {
   return {
     type: categoryConstants.ADD_CATEGORY_SUCCESS,
     payload: {
@@ -62,7 +122,7 @@ export const addCategorySuccess = data => {
   };
 };
 
-export const addCategoryFailed = error => {
+export const addCategoryFailed = (error) => {
   return {
     type: categoryConstants.ADD_CATEGORY_FAILED,
     payload: {
@@ -71,26 +131,27 @@ export const addCategoryFailed = error => {
   };
 };
 
-export const setCategoryEditing = task => {
+export const setCategoryEditing = (user) => {
   return {
     type: categoryConstants.SET_CATEGORY_EDITING,
     payload: {
-      task,
+      user,
     },
   };
 };
 
-export const updateCategory = (title, description) => {
+export const updateCategory = (name, photo, parrent_id) => {
   return {
     type: categoryConstants.UPDATE_CATEGORY,
     payload: {
-      title,
-      description,
+      name,
+      photo,
+      parrent_id,
     },
   };
 };
 
-export const updateCategorySuccess = data => {
+export const updateCategorySuccess = (data) => {
   return {
     type: categoryConstants.UPDATE_CATEGORY_SUCCESS,
     payload: {
@@ -99,7 +160,7 @@ export const updateCategorySuccess = data => {
   };
 };
 
-export const updateCategoryFailed = error => {
+export const updateCategoryFailed = (error) => {
   return {
     type: categoryConstants.UPDATE_CATEGORY_FAILED,
     payload: {
@@ -107,6 +168,7 @@ export const updateCategoryFailed = error => {
     },
   };
 };
+
 
 export const deleteCategory = id => {
   return {
@@ -129,6 +191,33 @@ export const deleteCategorySuccess = data => {
 export const deleteCategoryFailed = error => {
   return {
     type: categoryConstants.DELETE_CATEGORY_FAILED,
+    payload: {
+      error,
+    },
+  };
+};
+
+
+//==
+export const fetchListSubCategory = () => {
+  return {
+    type: categoryConstants.FETCH_SUBCATEGORY,
+  };
+};
+
+export const fetchListSubCategorySuccess = (data) => {
+  console.log(data);
+  return {
+    type: categoryConstants.FETCH_SUBCATEGORY_SUCCESS,
+    payload: {
+      data,
+    },
+  };
+};
+
+export const fetchListSubCategoryFailed = (error) => {
+  return {
+    type: categoryConstants.FETCH_SUBCATEGORY_FAILED,
     payload: {
       error,
     },

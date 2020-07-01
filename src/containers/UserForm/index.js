@@ -176,7 +176,7 @@ class UserForm extends Component {
                 className="form-control"
                 id="recipient-name"
                 name="password"
-                value={password}
+                
                 onChange={(event) => this.isChange(event)}
               />
             </div>
@@ -217,6 +217,7 @@ class UserForm extends Component {
                 value={roles}
                 onChange={(event) => this.isChange(event)}
               >
+                 <option>---</option>
                 {data.map((value, key) => {
                   return (
                     <option key={key} value={value.id}>

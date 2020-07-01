@@ -97,7 +97,7 @@ class Role extends Component {
                     <tr>
                       <th>id</th>
                       <th>name</th>
-                      <th>Action</th>
+                 
                     </tr>
                   </thead>
 

@@ -3,8 +3,11 @@ import { API_ENDPOINT } from '../constants';
 
 const url = 'users';
 
-export const getList = () => {
-  return axiosService.get(`${API_ENDPOINT}/${url}`);
+const limit = 10;
+
+
+export const getList = (page) => {
+  return axiosService.get(`${API_ENDPOINT}/${url}?limit=${limit}&page=${page}`);
 };
 
 export const addUser = data => {
@@ -12,7 +15,8 @@ export const addUser = data => {
 };
 
 export const updateUser = (data, userId) => {
-  return axiosService.post(`${API_ENDPOINT}/${url}/${userId}`, data,{_method: 'put'});
+  console.log(userId)
+  return axiosService.post(`${API_ENDPOINT}/${url}/${userId}?_method=PUT`, data);
 };
 
 export const deleteUser = userId   => {

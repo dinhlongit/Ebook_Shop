@@ -6,6 +6,14 @@ class OrderItem extends Component {
         this.props.onClickDelete(order);
       };
 
+      onClickOrder = (order) => {
+        this.props.onClickOrder(order);
+      };
+
+      onClickEdit = (order) => {
+        this.props.onClickEdit(order);
+      };
+    
   render() {
     const { order } = this.props;
     const {
@@ -43,6 +51,12 @@ class OrderItem extends Component {
               onClick={() => this.onClickEdit(order)}
             >
               <i className="fas fa-edit"></i>
+            </button>
+            <button
+              className="btn btn-outline-info"
+              onClick={() => this.onClickOrder(order)}
+            >
+              <i className="far fa-list-alt"></i>
             </button>
           </div>
         </td>

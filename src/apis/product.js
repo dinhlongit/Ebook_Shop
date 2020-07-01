@@ -1,19 +1,66 @@
 import axiosService from '../commons/axiosService';
 import { API_ENDPOINT } from '../constants';
+import axios from "axios";
 
 const url = 'products';
 const category = 'categories';
+
+const limit = 5;
+
+export const getListAdmin = (page) => {
+  return axiosService.get(`${API_ENDPOINT}/${url}?limit=${limit}&page=${page}`);
+};
+
 
 export const getList = () => {
   return axiosService.get(`${API_ENDPOINT}/${url}`);
 };
 
-export const addProduct = data => {
-  return axiosService.post(`${API_ENDPOINT}/${url}`, data);
+export const addProduct = (data) => {
+
+  const token = localStorage.getItem("access-token");
+
+  return axios({
+    method: "POST",
+    url: `${API_ENDPOINT}/${url}`,
+    data: data,
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then(function (response) {
+      //handle success
+      console.log(response);
+    })
+    .catch(function (response) {
+      //handle error
+      console.log(response);
+    });
 };
 
-export const updateProduct = (data, productId) => {
-  return axiosService.put(`${API_ENDPOINT}/${url}/${productId}`, data);
+export const updateProduct = (data,productId) => {
+
+  const token = localStorage.getItem("access-token");
+  
+  console.log(token);
+  return axios({
+    method: "POST",
+    url: `${API_ENDPOINT}/${url}/${productId}?_method=PUT`,
+    data: data,
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then(function (response) {
+      //handle success
+      console.log(response);
+    })
+    .catch(function (response) {
+      //handle error
+      console.log(response);
+    });
 };
 
 export const deleteProduct = productId   => {

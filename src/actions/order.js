@@ -4,9 +4,12 @@ import {submitOrder} from "../apis/order";
 import {userOrder} from "../apis/order";
 
 
-export const fetchListOrder = () => {
+export const fetchListOrder = (page) => {
   return {
     type: orderConstants.FETCH_ORDER,
+    payload: {
+      page,
+    },
   };
 };
 
@@ -36,7 +39,34 @@ export const fetchListOrderFailed = (error) => {
     },
   };
 };
+//===
 
+export const fetchListOrderById = (id) => {
+  return {
+    type: orderConstants.FETCH_ORDER_BYID,
+    payload: {
+      id,
+    },
+  };
+};
+
+export const fetchListOrderSuccessById = (data) => {
+  return {
+    type: orderConstants.FETCH_ORDER_SUCCESS_BYID,
+    payload: {
+      data,
+    },
+  };
+};
+
+export const fetchListOrderFailedById = (error) => {
+  return {
+    type: orderConstants.FETCH_ORDER_FAILED_BYID,
+    payload: {
+      error,
+    },
+  };
+};
 //DELETE
 export const deleteOrder = (id) => {
   return {

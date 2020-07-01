@@ -12,7 +12,7 @@ export const addProducer = data => {
 };
 
 export const updateProducer = (data, producerId) => {
-  return axiosService.post(`${API_ENDPOINT}/${url}/${producerId}`, data,{_method: 'put'});
+  return axiosService.post(`${API_ENDPOINT}/${url}/${producerId}?_method=PUT`, data);
 };
 
 export const deleteProducer = producerId   => {

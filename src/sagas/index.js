@@ -7,6 +7,7 @@ import { user_saga } from './user';
 import { role_saga } from './role';
 import { order_saga } from './order';
 import { producer_saga } from './producer';
+import { productstatus_saga } from './productstatus';
 
 export default function* rootSaga() {
   yield fork(watchFetchListCategoryAction)
@@ -17,5 +18,6 @@ export default function* rootSaga() {
   yield fork(producer_saga)
   yield fork(watchFetchListHomeAction) 
   yield fork(login_saga)
+  yield fork(productstatus_saga)
 }
 

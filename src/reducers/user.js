@@ -10,7 +10,8 @@ const initialState = {
     listUser:[{}],
     userEditing: null,
     userSignin: userInfo,
-    userUpdate : userInfo
+    userUpdate : userInfo,
+    page:''
   };
 
 
@@ -26,6 +27,7 @@ const initialState = {
         return {
           ...state,
           listUser: data,
+          page: data.current_page,
         };
       }
       case userConstants.FETCH_USER_FAILED: {
