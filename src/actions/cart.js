@@ -13,7 +13,7 @@ export const addProductToCart = product => {
 
     toastSuccess("Đã Thêm Vào Giỏ Hàng !");
 
-    console.log(product)
+   // console.log(product)
     return {
         type: ADD_PRODUCT_TO_CART,
         payload: product

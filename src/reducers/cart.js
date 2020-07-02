@@ -53,7 +53,7 @@ import {
             case ADD_PRODUCT_TO_CART:
                // const xx = action.payload.quantity = 1
                 
-                console.log(updatedCart)
+             //   console.log(updatedCart)
 
 
                 updatedCart = [...state.cart];
@@ -68,6 +68,12 @@ import {
                     };
     
                     updatedItem.quantity++;
+                    console.log(action.payload.amount)
+                    console.log(updatedItem.quantity++)
+                    if (updatedItem.quantity >= action.payload.amount){
+                        updatedItem.quantity = action.payload.amount;
+                    }
+                  //  console.log(updatedItem)
                     updatedCart[updatedItemIndex] = updatedItem;
                 }
                 localStorage.setItem('cartItems', JSON.stringify(updatedCart));

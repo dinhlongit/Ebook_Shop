@@ -17,6 +17,7 @@ const CartItem = (
         quantity,
         id,
         photo,
+        amount,
         dispatch,
     }
 ) => {
@@ -33,7 +34,7 @@ const CartItem = (
         const value = itemQuantity;
         console.log(type, value);
 
-        if(type === 'inc' && value < 10) {
+        if(type === 'inc' && value < amount) {
             setItemQuantity(itemQuantity + 1);
             dispatch(incrementCartQuantity(id));
         }
@@ -70,7 +71,7 @@ const CartItem = (
                             type="button" value="+" className="plus" />
                             <input
                                 onChange={handleQuantityChange}
-                                type="number" step="1" max="10" min="1" value={itemQuantity} title="Qty"
+                                type="number" step="1" max="100" min="1" value={itemQuantity} title="Qty"
                                    className="qty"
                                    size="4" />
                                 <input
