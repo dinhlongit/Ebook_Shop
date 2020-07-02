@@ -51,6 +51,7 @@ function Profile(props) {
      cartItems.push(order);
    
    }
+ 
 
    useEffect(() => { 
     
@@ -67,8 +68,6 @@ function Profile(props) {
     dispatch(update({name,address,address_id,email,phone_number},userSigin.id))
   }
 
-
-  
   //
  // <form onSubmit={submitHandler} >
    

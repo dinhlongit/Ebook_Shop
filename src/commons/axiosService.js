@@ -1,15 +1,19 @@
 import axios from "axios";
 import History from '../helpers/history';
-
+import Cookie from 'js-cookie';
 class AxiosService {
   constructor() {
     const instance = axios.create();
+
+
     //instance.defaults.headers.common['Authorization'] = "Default";
     instance.interceptors.response.use(this.handlesuccess, this.handleError);
     instance.interceptors.request.use(
       (config) => {
         try {
+         // var userInfo = Cookie.getJSON("userInfo");
           const token = localStorage.getItem('access-token');
+          //const token = userInfo.access_token;
           console.log(token);
          // config.headers.Authorization = token ? token : "";
           config.headers.Authorization = token ? `Bearer ${token}`: '';

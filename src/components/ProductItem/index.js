@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-var link = "https://ccbook.vn/wordpress/wp-content/uploads/2020/03/";
+var link = "http://localhost:8000/upload/product/";
 class UserItem extends Component {
   onClickDelete = (product) => {
     this.props.onClickDelete(product);

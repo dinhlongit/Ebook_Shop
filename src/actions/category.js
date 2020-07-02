@@ -1,5 +1,7 @@
 import * as categoryConstants from '../constants/category';
-import { STATUSES } from '../constants';
+import {
+  STATUSES
+} from '../constants';
 
 
 export const fetchListCategory = () => {

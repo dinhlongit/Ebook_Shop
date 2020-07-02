@@ -1,6 +1,14 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import {logout} from '../../../actions/user'
+
 
 class Header extends Component {
+
+
+  handleLogout = () =>{
+    this.props.logout();
+}
   render() {
     return (
       <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -49,16 +57,10 @@ class Header extends Component {
               className="dropdown-menu dropdown-menu-right"
               aria-labelledby="userDropdown"
             >
-              <a className="dropdown-item" href="/#">
-                Settings
-              </a>
-              <a className="dropdown-item" href="/#">
-                Activity Log
-              </a>
               <div className="dropdown-divider" />
-              <a className="dropdown-item" href="login.html">
+              <button onClick={() => {this.handleLogout()}} className="dropdown-item" >
                 Logout
-              </a>
+              </button>
             </div>
           </li>
         </ul>
@@ -67,4 +69,16 @@ class Header extends Component {
   }
 }
 
-export default Header;
+
+const mapStateToProps = (state) => {
+  return {
+    userSignin : state.user.userSignin,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout : () => dispatch(logout()) 
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

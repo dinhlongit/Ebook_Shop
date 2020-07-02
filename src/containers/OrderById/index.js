@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import * as modalActions from "./../../actions/modal";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-var link = "http://nhom5.azurewebsites.net/public/upload/product/";
+var link = "http://localhost:8000/upload/product/";
 
 class OrderById extends Component {
   render() {
@@ -12,7 +12,7 @@ class OrderById extends Component {
     console.log(data);
     return (
       <div>
-        {/* <div className="modal-body">
+        <div className="modal-body">
           <div className="contaner">
             {data.map((index, key) => {
               return (
@@ -42,7 +42,7 @@ class OrderById extends Component {
           >
             Close
           </button>
-        </div> */}
+        </div>
       </div>
     );
   }

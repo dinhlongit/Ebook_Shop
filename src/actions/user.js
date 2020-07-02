@@ -1,68 +1,124 @@
 import * as userConstants from "../constants/user";
 import {
-  USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS,
-  USER_SIGNIN_FAIL, USER_REGISTER_REQUEST,
-  USER_REGISTER_SUCCESS, USER_REGISTER_FAIL, USER_LOGOUT, USER_UPDATE_REQUEST, USER_UPDATE_SUCCESS, USER_UPDATE_FAIL
+  USER_SIGNIN_REQUEST,
+  USER_SIGNIN_SUCCESS,
+  USER_SIGNIN_FAIL,
+  USER_REGISTER_REQUEST,
+  USER_REGISTER_SUCCESS,
+  USER_REGISTER_FAIL,
+  USER_LOGOUT,
+  USER_UPDATE_REQUEST,
+  USER_UPDATE_SUCCESS,
+  USER_UPDATE_FAIL
 } from "../constants/user";
 import Axios from "axios";
 import Cookie from 'js-cookie';
-import { toastError,toastSuccess } from '../helpers/toastHelper';
-import { browserHistory } from 'react-router';
+import {
+  toastError,
+  toastSuccess
+} from '../helpers/toastHelper';
+import {
+  browserHistory
+} from 'react-router';
 import store from './../redux/configureStore'
-import { routerMiddleware, push } from 'react-router-redux'
+import {
+  routerMiddleware,
+  push
+} from 'react-router-redux'
 
 
 
 export const signin = (user) => async (dispatch) => {
-  dispatch({ type: USER_SIGNIN_REQUEST, payload: user });
+  dispatch({
+    type: USER_SIGNIN_REQUEST,
+    payload: user
+  });
 
   try {
-    const { data } = await Axios.post("http://127.0.0.1:8000/api/auth/login", user);
-    dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
- 
-  //  Cookie.set('userInfo', JSON.stringify(data));
-    browserHistory.push('/')
-    window.location.reload(); 
+    const {
+      data
+    } = await Axios.post("http://127.0.0.1:8000/api/auth/login", user);
+    dispatch({
+      type: USER_SIGNIN_SUCCESS,
+      payload: data
+    });
+
+    //  Cookie.set('userInfo', JSON.stringify(data));
+    if (data.role[0] === 'Admin') {
+      browserHistory.push('/admin')
+      window.location.reload();
+    } else {
+      browserHistory.push('/')
+      window.location.reload();
+    }
+
 
   } catch (error) {
-   // dispatch(push('/register'));
-    dispatch({ type: USER_SIGNIN_FAIL, payload: error.message });
+    // dispatch(push('/register'));
+    dispatch({
+      type: USER_SIGNIN_FAIL,
+      payload: error.message
+    });
   }
 }
 
 export const register = (user) => async (dispatch) => {
-  dispatch({ type: USER_REGISTER_REQUEST, payload: user });
+  dispatch({
+    type: USER_REGISTER_REQUEST,
+    payload: user
+  });
   try {
-    const { data } = await Axios.post("http://127.0.0.1:8000/api/auth/register", user );
+    const {
+      data
+    } = await Axios.post("http://127.0.0.1:8000/api/auth/register", user);
     toastSuccess("Đăng Ký thành công !");
-    dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
- 
+    dispatch({
+      type: USER_REGISTER_SUCCESS,
+      payload: data
+    });
+
   } catch (error) {
     toastSuccess("Đăng Ký không thành công !");
-    dispatch({ type: USER_REGISTER_FAIL, payload: error.message });
+    dispatch({
+      type: USER_REGISTER_FAIL,
+      payload: error.message
+    });
   }
 }
 
 
-export const update = (user,id) => async (dispatch) => {
+export const update = (user, id) => async (dispatch) => {
   console.log(user)
-  dispatch({ type: USER_UPDATE_REQUEST, payload: user });
+  dispatch({
+    type: USER_UPDATE_REQUEST,
+    payload: user
+  });
   try {
-    const { data } = await Axios.post("http://127.0.0.1:8000/api/auth/update/"+id, user );
+    const {
+      data
+    } = await Axios.post("http://127.0.0.1:8000/api/auth/update/" + id, user);
 
     toastSuccess("Cập Nhật Thông Tin thành công !");
-    dispatch({ type: USER_UPDATE_SUCCESS, payload: data });
-   
+    dispatch({
+      type: USER_UPDATE_SUCCESS,
+      payload: data
+    });
+
   } catch (error) {
     toastSuccess("Cập Nhật Thông Tin không thành công !");
-    dispatch({ type: USER_UPDATE_FAIL, payload: error.message });
+    dispatch({
+      type: USER_UPDATE_FAIL,
+      payload: error.message
+    });
   }
 }
 
 
 export const logout = () => (dispatch) => {
   Cookie.remove("userInfo");
-  dispatch({ type: USER_LOGOUT })
+  dispatch({
+    type: USER_LOGOUT
+  })
 }
 
 

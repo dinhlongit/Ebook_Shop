@@ -11,7 +11,7 @@ import Producer from '../containers/Producer';
 
 
 export const API_ENDPOINT = 'http://127.0.0.1:8000/api';
-export const SERVER_IMAGE = 'https://ccbook.vn/wordpress/wp-content/uploads/2020/03/';
+export const SERVER_IMAGE = 'http://localhost:8000/upload/product/';
 
 export const STATUS_CODE = {
   SUCCESS: 200,

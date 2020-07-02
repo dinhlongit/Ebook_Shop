@@ -1,7 +1,14 @@
 import * as orderConstants from "../constants/order";
-import {toastError, toastSuccess} from '../helpers/toastHelper'
-import {submitOrder} from "../apis/order";
-import {userOrder} from "../apis/order";
+import {
+  toastError,
+  toastSuccess
+} from '../helpers/toastHelper'
+import {
+  submitOrder
+} from "../apis/order";
+import {
+  userOrder
+} from "../apis/order";
 
 
 export const fetchListOrder = (page) => {
@@ -194,13 +201,16 @@ export const updateOrderFailed = (error) => {
 
 
 export const submitOrders = datacart => {
-  
-   return (dispatch=>{
- return submitOrder(datacart).then(res=>{
-    const {status, data} = res;
-     dispatch(deleteListCart());
+
+  return (dispatch => {
+    return submitOrder(datacart).then(res => {
+      const {
+        status,
+        data
+      } = res;
+      dispatch(deleteListCart());
+    });
   });
-   });
 };
 
 
@@ -208,10 +218,13 @@ export const submitOrders = datacart => {
 
 
 export const fetchListUserOrder = (user_id) => {
-  return (dispatch) =>{
-    return userOrder(user_id).then(res=>{
-        const {status, data} = res;
-        dispatch(fetchListUserOrderSuccess(data.data));
+  return (dispatch) => {
+    return userOrder(user_id).then(res => {
+      const {
+        status,
+        data
+      } = res;
+      dispatch(fetchListUserOrderSuccess(data.data));
     });
   }
 
