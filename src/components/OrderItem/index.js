@@ -1,19 +1,18 @@
 import React, { Component } from "react";
 
 class OrderItem extends Component {
+  onClickDelete = (order) => {
+    this.props.onClickDelete(order);
+  };
 
-    onClickDelete = (order) => {
-        this.props.onClickDelete(order);
-      };
+  onClickOrder = (order) => {
+    this.props.onClickOrder(order);
+  };
 
-      onClickOrder = (order) => {
-        this.props.onClickOrder(order);
-      };
+  onClickEdit = (order) => {
+    this.props.onClickEdit(order);
+  };
 
-      onClickEdit = (order) => {
-        this.props.onClickEdit(order);
-      };
-    
   render() {
     const { order } = this.props;
     const {

@@ -16,19 +16,21 @@ import {
     updateOrderSuccess,
     updateOrderFailed,
     fetchListOrderSuccessById,
-    fetchListOrderFailedById
+    fetchListOrderFailedById,
+    fetchListOrder
   } from "../actions/order";
   import { hideModal } from "../actions/modal";
   import { hideLoading, showLoading } from "../actions/ui";
   import { getList, deleteOrder, addOrder, updateOrder,getListById } from "../apis/order";
   import * as orderTypes from "../constants/order";
   import { STATUS_CODE } from "../constants";
+  import { toastSuccess } from "../helpers/toastHelper";
+
   
   export function* order_saga() {
     yield takeEvery(orderTypes.FETCH_ORDER, wacthFetchListOrder);
     yield takeLatest(orderTypes.DELETE_ORDER, watchDeleteOrder);
-
-
+    yield takeLatest(orderTypes.UPDATE_ORDER, watchUpdateOrder);
     yield takeEvery(orderTypes.FETCH_ORDER_BYID, wacthFetchListOrderById);
 
   }
@@ -78,5 +80,25 @@ function* wacthFetchListOrderById(action) {
     }
     yield delay(1000);
     yield put(hideLoading());
+  }
+  
+
+
+  function* watchUpdateOrder({ payload }) {
+    yield put(showLoading());
+    try {
+      const status_id = parseInt(payload.orderstatus);
+      const orderEditing = yield select((state) => state.order.orderEditing);
+      const resp = yield call(updateOrder, { status_id }, orderEditing.id);
+      const page = yield select((state) => state.order.page);
+      toastSuccess("Update order thành công");
+      yield put(fetchListOrder(page));
+      yield put(hideModal());
+    } catch (e) {
+      yield put(updateOrderFailed(e));
+    } finally {
+      yield delay(1000);
+      yield put(hideLoading());
+    }
   }
   

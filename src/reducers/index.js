@@ -13,6 +13,8 @@ import statusReducer from './status';
 import {userReducer, userSigninReducer,userRegisterReducer, userUpdateReducer} from "./user";
 import reviewReducer from './review';
 import productstatusReducer from './productstatus';
+import reportReducer from './report';
+import orderstatusReducer from "./orderstatus";
 
 
 
@@ -35,7 +37,9 @@ const rootReducer = combineReducers({
   producer: producerReducer,
   cart : cartReducer,
   status:statusReducer,
-  productstatus:productstatusReducer
+  productstatus:productstatusReducer,
+  report:reportReducer,
+  orderstatus: orderstatusReducer,
 });
 
 export default rootReducer;

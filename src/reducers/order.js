@@ -132,14 +132,14 @@ const initialState = {
         case orderConstants.UPDATE_ORDER_SUCCESS: {
           const { data } = action.payload;
           const { listOrder } = state;
-          const index = listOrder.findIndex(item => item.id === data.id);
+          const index = listOrder.findIndex((item) => item.id === data.id);
           if (index !== -1) {
             const newList = [
               ...listOrder.slice(0, index),
               data,
               ...listOrder.slice(index + 1),
             ];
-            toastSuccess('Cập nhật User thành công');
+            toastSuccess("Cập nhật order thành công");
             return {
               ...state,
               listOrder: newList,
@@ -150,8 +150,8 @@ const initialState = {
           };
         }
         case orderConstants.UPDATE_ORDER_FAILED: {
-          const { error } = action.payload;
-          toastError(error);
+          toastError("Update order thất bại");
+          window.location.reload();
           return {
             ...state,
           };

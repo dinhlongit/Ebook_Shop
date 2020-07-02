@@ -157,26 +157,12 @@ export const setOrderEditing = (user) => {
 };
 
 export const updateOrder = (
-  name,
-  phone_number,
-  email,
-  birthday,
-  password,
-  address,
-  address_id,
-  roles
+  orderstatus 
 ) => {
   return {
     type: orderConstants.UPDATE_ORDER,
     payload: {
-      name,
-      phone_number,
-      email,
-      birthday,
-      password,
-      address,
-      address_id,
-      roles,
+      orderstatus 
     },
   };
 };
@@ -212,9 +198,6 @@ export const submitOrders = datacart => {
     });
   });
 };
-
-
-
 
 
 export const fetchListUserOrder = (user_id) => {

@@ -5,6 +5,7 @@ import * as orderActions from "./../../actions/order";
 import * as modalActions from "./../../actions/modal";
 import OrderItem from "../../components/OrderItem";
 import OrderById from "../OrderById";
+import OrderForm from "../OrderForm";
 
 class Order extends Component {
   componentDidMount() {
@@ -53,7 +54,7 @@ class Order extends Component {
     deleteOrder(id);
   }
 
-  showModalOrder = (order) =>{
+  showModalOrder = (order) => {
     const { orderActionCreators } = this.props;
     const { fetchListOrderById } = orderActionCreators;
     fetchListOrderById(order.id);
@@ -65,17 +66,27 @@ class Order extends Component {
     } = modalActionCreators;
     showModal();
     changeModalTitle(`chi tiết order ${order.id}`);
-    changeModalContent(
-   
-      <OrderById/>
-    );
-  }
-
+    changeModalContent(<OrderById />);
+  };
+  
+  showModalEditOrder = (order) => {
+    const { orderActionCreators, modalActionCreators } = this.props;
+    const { setOrderEditing } = orderActionCreators;
+    setOrderEditing(order);
+    const {
+      showModal,
+      changeModalTitle,
+      changeModalContent,
+    } = modalActionCreators;
+    showModal();
+    changeModalTitle("Cập nhật order");
+    changeModalContent(<OrderForm />);
+  };
 
   renderOrder = () => {
     let data = this.props.data.data;
-    
-    console.log(data)
+
+    console.log(data);
 
     if (data === undefined) {
       data = [];
@@ -89,6 +100,7 @@ class Order extends Component {
           order={order}
           onClickDelete={this.showModalDeleteOrder}
           onClickOrder={this.showModalOrder}
+          onClickEdit={this.showModalEditOrder}
         />
       );
     });
@@ -126,8 +138,6 @@ class Order extends Component {
     fetchListOrder(page);
   };
 
-
-
   render() {
     const { data } = this.props;
     console.log(data);
@@ -135,17 +145,17 @@ class Order extends Component {
     return (
       <main>
         <div className="container-fluid">
-          <h1 className="mt-4">Product</h1>
+          <h1 className="mt-4">Order</h1>
           <ol className="breadcrumb mb-4">
             <li className="breadcrumb-item">
               <a href="index.html">Admin</a>
             </li>
-            <li className="breadcrumb-item active">Product</li>
+            <li className="breadcrumb-item active">Order</li>
           </ol>
           <div className="card mb-4">
             <div className="card-header">
               <i className="fas fa-table mr-1" />
-              DataTable Product
+              DataTable Order
             </div>
             <div className="card-body">
               <div className="table-responsive">
@@ -204,8 +214,6 @@ class Order extends Component {
                   </li>
                 </ul>
               </nav>
-
-
             </div>
           </div>
         </div>

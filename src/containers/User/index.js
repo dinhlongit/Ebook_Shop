@@ -142,13 +142,13 @@ class User extends Component {
     return (
       <main>
         <div className="container-fluid">
-          <h1 className="mt-2">Tables</h1>
+          <h1 className="mt-2">User</h1>
 
           <ol className="breadcrumb mb-2">
             <li className="breadcrumb-item">
-              <a href="index.html">Dashboard</a>
+              <a href="index.html">Admin</a>
             </li>
-            <li className="breadcrumb-item active">Tables</li>
+            <li className="breadcrumb-item active">User</li>
           </ol>
 
           <div className="card mb-2" />
@@ -162,7 +162,7 @@ class User extends Component {
           <div className="card mb-2">
             <div className="card-header">
               <i className="fas fa-table mr-1" />
-              DataTable Example
+              DataTable User
             </div>
             <div className="card-body">
               <div className="table-responsive">

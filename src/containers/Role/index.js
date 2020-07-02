@@ -74,17 +74,17 @@ class Role extends Component {
     return (
       <main>
         <div className="container-fluid">
-          <h1 className="mt-4">Product</h1>
+          <h1 className="mt-4">Role</h1>
           <ol className="breadcrumb mb-4">
             <li className="breadcrumb-item">
               <a href="index.html">Admin</a>
             </li>
-            <li className="breadcrumb-item active">Product</li>
+            <li className="breadcrumb-item active">Role</li>
           </ol>
           <div className="card mb-4">
             <div className="card-header">
               <i className="fas fa-table mr-1" />
-              DataTable Product
+              DataTable Role
             </div>
             <div className="card-body">
               <div className="table-responsive">

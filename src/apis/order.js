@@ -15,7 +15,8 @@ export const addOrder = data => {
 };
 
 export const updateOrder = (data, orderId) => {
-  return axiosService.post(`${API_ENDPOINT}/${url}/${orderId}`, data,{_method: 'put'});
+  console.log('cc')
+  return axiosService.post(`${API_ENDPOINT}/${url}/${orderId}?_method=PUT`, data);
 };
 
 export const deleteOrder = orderId => {
