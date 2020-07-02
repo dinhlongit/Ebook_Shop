@@ -51,11 +51,6 @@ import {
                 return {...state, cart: updatedCart};
     
             case ADD_PRODUCT_TO_CART:
-               // const xx = action.payload.quantity = 1
-                
-             //   console.log(updatedCart)
-
-
                 updatedCart = [...state.cart];
                  
                 updatedItemIndex = updatedCart.findIndex(item => item.id === action.payload.id);
@@ -68,8 +63,6 @@ import {
                     };
     
                     updatedItem.quantity++;
-                    console.log(action.payload.amount)
-                    console.log(updatedItem.quantity++)
                     if (updatedItem.quantity >= action.payload.amount){
                         updatedItem.quantity = action.payload.amount;
                     }

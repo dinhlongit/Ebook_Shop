@@ -73,7 +73,7 @@ class Main extends Component {
         }
      
         return (
-            <Router >
+            <Router  history={browserHistory}>
          
                 <div className="header">
                     <div className="header__top">
@@ -182,6 +182,7 @@ class Main extends Component {
                 
                     <Route path='/login'>
                     <Login setdd={this.setDropDown} />
+                       
                     </Route>
                     <Route path='/profile'>
                     <Profile setdd={this.setDropDown} />

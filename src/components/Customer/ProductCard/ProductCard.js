@@ -25,7 +25,7 @@ class ProductCard extends Component {
                         <Link to={`/productdetail/${id}`} onClick={() => this.props.setdd(false)}>
                             <img src={`${SERVER_IMAGE}${photo}`} alt={name} className='card-img-top' />
                         </Link>
-                        <label className="btn btn-warning discount">- {this.props.product.discount*100}%</label> 
+                        <label className="btn btn-warning discount">- {this.props.product.discount}%</label> 
                         <div className='btn-bar'>
                             {inCart ? (
                                 <div 

@@ -64,7 +64,7 @@ const Shop = (props) => {
         <li><input type="radio"
          onClick={(id) =>{
           title = "Tất Cả";
-          handleListProduct('',pdcID,price1,price2,page,sort)}}
+          handleListProduct('','','','',page,'')}}
          name="categories" 
          className="checkmark" 
          /><label htmlFor="cat">Tất Cả</label>
@@ -99,7 +99,7 @@ const Shop = (props) => {
         <li><input type="radio"
          onClick={(id) =>{
           title = "Tất Cả";
-          handleListProduct('',pdcID,price1,price2,page,sort)}}
+          handleListProduct('','','','',page,'')}}
          name="filterprice" 
          className="checkmark" 
          /><label>Tất Cả</label>
@@ -138,7 +138,7 @@ const Shop = (props) => {
         <li><input type="radio"
          onClick={(id) =>{
           title = "Tất Cả";
-          handleListProduct('',pdcID,price1,price2,page,sort)}}
+          handleListProduct('','','','',page,'')}}
          name="price" 
          className="checkmark" 
          /><label>Tất Cả</label>

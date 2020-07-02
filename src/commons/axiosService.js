@@ -11,11 +11,10 @@ class AxiosService {
     instance.interceptors.request.use(
       (config) => {
         try {
-         // var userInfo = Cookie.getJSON("userInfo");
-          const token = localStorage.getItem('access-token');
-          //const token = userInfo.access_token;
-          console.log(token);
-         // config.headers.Authorization = token ? token : "";
+         var userInfo = Cookie.getJSON("userInfo");
+          const token = userInfo.access_token;
+          
+
           config.headers.Authorization = token ? `Bearer ${token}`: '';
         } catch (e) {
           History.push("/login");

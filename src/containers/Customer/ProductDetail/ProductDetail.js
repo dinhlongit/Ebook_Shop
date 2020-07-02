@@ -44,6 +44,7 @@ class ProductDetailPage extends Component {
  
     }
     handleAdd = (product) =>{
+        console.log(product)
         this.props.addTocart(product)
     }
 
@@ -160,7 +161,7 @@ class ProductDetailPage extends Component {
                         </div>
                         <div className='col-lg-12 col-10 product_btns'>
                             <div className=''>
-                                <div className="pro-qty">
+                                {/* <div className="pro-qty">
                                     <div className="dec qtybtn" onClick={this.state.count > 1 ? this.handleChangeCount(-1) : null}>
                                         -
                                     </div>
@@ -168,12 +169,13 @@ class ProductDetailPage extends Component {
                                     <div className="inc qtybtn" onClick={this.state.count < amount ? this.handleChangeCount(1) : null}>
                                         +
                                     </div>
-                                </div>  
-
+                                </div>   */}
+                              
+                                    
 
                                 <button className='button-second'
                                  onClick={() => {
-                                    data.quantity = this.state.count;
+                                    data.quantity = 1;
                                     this.handleAdd(data)
                                 }}
                                 >
