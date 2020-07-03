@@ -179,11 +179,12 @@
 }
 
 .header__cart {
+	padding: 10px;
+	border: 2px solid red;
     position: fixed;
     text-align: right;
-    padding-top: 24px;
-    right: 8%;
-	top: -15px;
+    right: 2%;
+	bottom: 20px;
 	
 }
 
