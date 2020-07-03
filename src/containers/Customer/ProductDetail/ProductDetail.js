@@ -170,18 +170,21 @@ class ProductDetailPage extends Component {
                                         +
                                     </div>
                                 </div>   */}
-                              
+                                 {
+                                     (amount > 0 ) ?<button className='button-second'
+                                     onClick={() => {
+                                        data.quantity = 1;
+                                        this.handleAdd(data)
+                                    }}
+                                    >
+                                        Add to cart
+                                        
+                                </button> : <button className='button-second'>Hết Hàng</button>
+                                 }
+                
                                     
 
-                                <button className='button-second'
-                                 onClick={() => {
-                                    data.quantity = 1;
-                                    this.handleAdd(data)
-                                }}
-                                >
-                                    Add to cart
-                                    
-                            </button>
+                                
                                 <Link to="/">
                                     <button className='button-main'>
                                         Continue shopping

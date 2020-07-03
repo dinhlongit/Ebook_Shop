@@ -12,7 +12,7 @@ import {priceformat} from '../../../constants/priceformat'
 
 class ProductCard extends Component {
     render() {
-        const { id, name, photo, description, price, discount} = this.props.product;
+        const { id, name, photo, amount, description, price, discount} = this.props.product;
         let inCart = false;
         return (
 
@@ -27,33 +27,21 @@ class ProductCard extends Component {
                         </Link>
                         <label className="btn btn-warning discount">- {this.props.product.discount}%</label> 
                         <div className='btn-bar'>
-                            {inCart ? (
-                                <div 
-                                    className='incart'
-                                    onClick={() => {
-                                        console.log('disable')
-                                    }}
-                                >
-                                    <p className='text-capitalize mb-0' disabled>
-                                        {" "}
-                                        in cart
-                                    </p>
-
-                                </div>
-                            ) : (
-                                    <button
-                                        className='cart-btn'
-                                        disabled={inCart ? true : false}
-                                        onClick={() => {
-                                            const {product} = this.props;
-                                            product.quantity = 1;
-                                            this.props.dispatch(addProductToCart(product))
-                                        }}
-                                    >
-                                        <FontAwesomeIcon icon={faCartPlus} />
-
-                                    </button>
-                                )}
+                         {
+                           (amount > 0 ) ? <button
+                           className='cart-btn'
+                           disabled={inCart ? true : false}
+                           onClick={() => {
+                               const {product} = this.props;
+                               product.quantity = 1;
+                               this.props.dispatch(addProductToCart(product))
+                           }}
+                       >
+                           <FontAwesomeIcon icon={faCartPlus} />
+                        </button> : <button className="btn btn-warning">Hết Hàng</button>
+                         }
+                                    
+                             
 
                                
                         </div>
