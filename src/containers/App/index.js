@@ -54,10 +54,9 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router history={history}>
-      
         <ToastContainer />
           <Modal/>
-          <GlobalLoading />
+          {/* <GlobalLoading /> */}
           <Switch>
             {this.renderAdminRoutes()}
             {this.renderDefaultRoutes()}

@@ -68,19 +68,19 @@ export const ROUTES = [
   {
     name: 'home',
     path: '/',
-    //exact: true,
+    exact: false,
     component: Main,
   },
-  {
-    name: 'Trang Login',
-    path: '/login',
+  // {
+  //   name: 'Trang Login',
+  //   path: '/login',
 
-    component: Login,
-  },
-  {
-    name: 'Trang Register',
-    path: '/register',
+  //   component: Login,
+  // },
+  // {
+  //   name: 'Trang Register',
+  //   path: '/register',
     
-    component: Register,
-  }
+  //   component: Register,
+  // }
 ];

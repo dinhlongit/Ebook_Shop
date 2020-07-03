@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faTwitter, faLinkedin, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import CategoryList from '../../components/Customer/CategoryList/CategoryList';
 import CartDetailPage from './CartDetailPage/CartDetailPage';
+
 import { BrowserRouter as Router, Switch, Route, Link, NavLink, withRouter, Redirect } from "react-router-dom";
 import ProductDetail from './ProductDetail/ProductDetail';
 import HomePage from './HomePage/HomePage';
@@ -26,7 +27,7 @@ import Shop from '../../containers/Customer/Shop/Shop'
 import Profile from '../../containers/Profile/Profile'
 import {logout} from '../../actions/user'
 import {priceformat } from '../../constants/priceformat'
-
+import Cookie from 'js-cookie';
 
 class Main extends Component {
 
@@ -75,8 +76,8 @@ class Main extends Component {
         }
      
         return (
-            <Router  history={browserHistory}>
-         
+            
+             <div>
                 <div className="header">
                     <div className="header__top">
                         <div className="container">
@@ -181,11 +182,13 @@ class Main extends Component {
                     </section>
                 </div>
                 <Switch>
-                
-                    <Route path='/login'>
-                    <Login setdd={this.setDropDown} />
-                       
+
+                    <Route path='/login'   setdd={this.setDropDown} component={Login}>
+                  
                     </Route>
+                   
+
+
                     <Route path='/profile'>
                     <Profile setdd={this.setDropDown} />
                     </Route>
@@ -228,8 +231,8 @@ class Main extends Component {
                         </div>
                     </div>
                 </footer>
-
-            </Router>
+                </div>
+       
         )
     }
 }

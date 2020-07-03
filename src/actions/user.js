@@ -25,7 +25,8 @@ import {
   routerMiddleware,
   push
 } from 'react-router-redux'
-
+import history from "../helpers/history";
+import {updateProfile} from '../apis/user'
 
 
 
@@ -39,23 +40,24 @@ export const signin = (user) => async (dispatch) => {
     const {
       data
     } = await Axios.post("http://127.0.0.1:8000/api/auth/login", user);
+
+
     dispatch({
       type: USER_SIGNIN_SUCCESS,
       payload: data
     });
-
-    //  Cookie.set('userInfo', JSON.stringify(data));
     if (data.role[0] === 'Admin') {
-      browserHistory.push('/admin')
+      history.push('/admin')
       window.location.reload();
+
     } else {
-      browserHistory.push('/')
+      history.push('/')
       window.location.reload();
+;
     }
 
 
   } catch (error) {
-    // dispatch(push('/register'));
     dispatch({
       type: USER_SIGNIN_FAIL,
       payload: error.message
@@ -73,7 +75,7 @@ export const register = (user) => async (dispatch) => {
       data
     } = await Axios.post("http://127.0.0.1:8000/api/auth/register", user);
     toastSuccess("Đăng Ký thành công !");
-  
+    history.push('/login')
     dispatch({
       type: USER_REGISTER_SUCCESS,
       payload: data
@@ -96,15 +98,20 @@ export const update = (user, id) => async (dispatch) => {
     payload: user
   });
   try {
-    const {
-      data
-    } = await Axios.post("http://127.0.0.1:8000/api/auth/update/" + id, user);
+    // const {
+    //   data
+    // } = await Axios.post("http://127.0.0.1:8000/api/auth/update/" + id, user);
 
-    toastSuccess("Cập Nhật Thông Tin thành công !");
-    dispatch({
-      type: USER_UPDATE_SUCCESS,
-      payload: data
-    });
+   updateProfile(id,user).then(res => {
+     console.log(id)
+      const {
+        data} = res;
+        toastSuccess("Cập Nhật Thông Tin thành công !");
+        dispatch({
+          type: USER_UPDATE_SUCCESS,
+          payload: data
+        });
+      });
 
   } catch (error) {
     toastSuccess("Cập Nhật Thông Tin không thành công !");

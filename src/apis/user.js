@@ -22,3 +22,11 @@ export const updateUser = (data, userId) => {
 export const deleteUser = userId   => {
   return axiosService.post(`${API_ENDPOINT}/${url}/${userId}`,{_method: 'delete'});
 };
+
+
+export const updateProfile = (id,user)   => {
+  return axiosService.post(`${API_ENDPOINT}/auth/update/${id}`,user);
+};
+
+
+
