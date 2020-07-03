@@ -8,6 +8,7 @@ import {fetchSearchProductRequest} from "../../../actions/product";
 import axios from 'axios';
 
 var link = "/productdetail/";  
+var imageLink = "http://localhost:8000/upload/product/";  
 
   class Search extends React.Component {
    
@@ -39,7 +40,7 @@ var link = "/productdetail/";
    renderSuggestion = suggestion => (
      <div>
   <Link to={`${link}${suggestion.id}`}>
-  <img src="https://ccbook.vn/wordpress/wp-content/uploads/2020/03/AVATA-3-300x300.png" className="image_search">
+  <img src={`${imageLink}${suggestion.photo}`} className="image_search">
   </img>  
   {suggestion.name}
   </Link>

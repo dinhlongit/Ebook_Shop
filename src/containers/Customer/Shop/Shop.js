@@ -38,9 +38,7 @@ const Shop = (props) => {
         }, [])
 
     const dispatch = useDispatch();
-    const handleListProduct = (catID,pdcID,price1,price2,page) =>{
-        // console.log(catID)
-        // console.log(pdcID)
+    const handleListProduct = (catID,pdcID,price1,price2,page,sort) =>{
         dispatch(fetchCategoryProductRequest(catID,pdcID,price1,price2,keyword,sort,limit, page));
     }
 
@@ -63,6 +61,7 @@ const Shop = (props) => {
         <ul className="shopping">
         <li><input type="radio"
          onClick={(id) =>{
+           window.location='/category'
           title = "Tất Cả";
           handleListProduct('','','','',page,'')}}
          name="categories" 
@@ -96,14 +95,7 @@ const Shop = (props) => {
         Sort By Price
         </a>
         <ul className="shopping">
-        <li><input type="radio"
-         onClick={(id) =>{
-          title = "Tất Cả";
-          handleListProduct('','','','',page,'')}}
-         name="filterprice" 
-         className="checkmark" 
-         /><label>Tất Cả</label>
-         </li>
+       
 
            <li><input type="radio"
               onClick={(id) =>{
@@ -135,14 +127,7 @@ const Shop = (props) => {
 
 
         <ul className="shopping">
-        <li><input type="radio"
-         onClick={(id) =>{
-          title = "Tất Cả";
-          handleListProduct('','','','',page,'')}}
-         name="price" 
-         className="checkmark" 
-         /><label>Tất Cả</label>
-         </li>
+      
         {
            
            listPrice ? listPrice.map(price => { 

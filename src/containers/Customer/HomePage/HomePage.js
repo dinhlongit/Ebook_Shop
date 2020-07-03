@@ -42,8 +42,8 @@ class HomePage extends Component  {
                 </div>
                   <ProductList  key={1} products={data.filter(item => item.discount > 0)} title="Sản Phẩm Khuyến Mãi" setdd={this.props.setdd}/>
                   <ProductList  key={2} products={data.filter(item => item.status_id == 3)} title="Sản Phẩm Mới" setdd={this.props.setdd}/>
-                  <ProductList   key={3} products={data.filter(item => item.category_id == 1)} title="Bí quyết chinh phục điểm cao" setdd={this.props.setdd}/>
-                  <ProductList  key={4} products={data.filter(item => item.category_id == 2)} title="CC thần tốc luyện đề 2020" setdd={this.props.setdd}/>
+                  <ProductList   key={3} products={data.filter(item => item.category_id == 23)} title="Sách Học Ngoại Ngữ" setdd={this.props.setdd}/>
+                  <ProductList  key={4} products={data.filter(item => item.category_id == 20)} title="Sách Thiếu Nhi" setdd={this.props.setdd}/>
             </div>
         )
     }
