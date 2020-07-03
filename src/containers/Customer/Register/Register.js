@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Switch, Route, Link, NavLink} from "react-rout
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {register} from "../../../actions/user";
+import {city} from '../../../constants/city'
+
 function Register(props) {
   const [name, setname] = useState('');
   const [phone_number, setphone_number] = useState('');
@@ -145,22 +147,25 @@ function Register(props) {
                                 City
                               </label>
                               <select className="form-control" id="address_id" name="address_id"  onChange={(e) => setaddress_id(e.target.value)}>
-                              <option value="1">Hue</option>
-                              <option value="2">Da Nang</option>
-                              <option value="3">Quang Tri</option>
-                              <option value="4">Thua Thien Hue</option>
+                              {city.map((item,key)=>{
+                              return  <option value={item.id}>{item.name}</option>
+                              })}
                               </select>
                             </div>
                           </div>
                         </div>
                         <div className="form-group mt-4 mb-0">
-                          <button
+                         { (name && phone_number && address && email && password && address_id) ?           <button
                             className="btn btn-primary btn-block"
                             type="submit"
                           >
                             Create Account
 
-                          </button>
+                         </button> : null}
+
+
+
+                
                         </div>
                       </form>
                     </div>

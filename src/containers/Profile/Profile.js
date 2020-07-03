@@ -9,7 +9,7 @@ import { update } from "../../actions/user";
 import CartDetailPage from '../../containers/Customer/CartDetailPage/CartDetailPage';
 import './Profile.css';
 import CartItem from '../../components/Customer/CartItem/CartItem'
-// import {GlobalLoading} '../../components/GlobalLoading';
+import {city} from '../../constants/city'
 var status ;
 function Profile(props) {
   
@@ -101,10 +101,9 @@ function Profile(props) {
         <div className="form-group">
           <label htmlFor="exampleInputPassword1"><b>City</b></label>
         <select value = {address_id} className="form-control" id="address_id" name="address_id" onChange={(e) => setaddress_id(e.target.value)}>
-        <option value="1">Hue</option>
-        <option value="2">Da Nang</option>
-        <option value="3">Quang Tri</option>
-        <option value="4">Thua Thien Hue</option>
+        {city.map((item,key)=>{
+         return  <option value={item.id}>{item.name}</option>
+        })}
       </select>
       <br></br>
         </div>

@@ -25,9 +25,11 @@ import ProductCard from '../../components/Customer/ProductCard/ProductCard'
 import Shop from '../../containers/Customer/Shop/Shop'
 import Profile from '../../containers/Profile/Profile'
 import {logout} from '../../actions/user'
+import {priceformat } from '../../constants/priceformat'
 
 
 class Main extends Component {
+
 
     constructor(props) {
         super(props);
@@ -153,7 +155,7 @@ class Main extends Component {
 
                                         </li>
                                     </ul>
-                                    <div className="header__cart__price">items: <b>{this.props.totalPrice}</b></div>
+                                    <div className="header__cart__price">Tổng Tiền : <b>{priceformat(this.props.totalPrice)}</b></div>
                                 </div>
                             </div>
                         </div>
@@ -218,6 +220,7 @@ class Main extends Component {
                             <div className="col-lg-12">
                                 <div className="footer__copyright">
                                     <div className="footer__copyright__text">
+                                  
                                         <p>Copyright &copy; 2020 by: Book</p>
                                     </div>
                                 </div>
@@ -225,6 +228,7 @@ class Main extends Component {
                         </div>
                     </div>
                 </footer>
+
             </Router>
         )
     }
@@ -240,7 +244,7 @@ const mapStateToProps = (state) => {
           return count + curItem.quantity;
       }, 0),
      totalPrice: state.cart.cart.reduce((count, curItem) => {
-         return count + (curItem.price * curItem.quantity);
+         return count + ((curItem.price - (curItem.price * (curItem.discount/100))) * curItem.quantity);
      }, 0)
     };
   };

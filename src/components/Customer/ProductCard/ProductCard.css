@@ -3,10 +3,10 @@
 	padding-top: 15px;
 }
 .product_text .price {
-    color: var(--main-color);
+    color: #ff002f;
     font-weight: 700;
     margin-bottom: .3rem;
-}
+  }
 .product_text .name {
     color: #252525;
     font-weight: 700;

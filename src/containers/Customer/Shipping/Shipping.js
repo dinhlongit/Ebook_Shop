@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { submitOrders } from "../../../actions/order";
+import {city} from '../../../constants/city'
 
 function Shipping(props) {
   
@@ -32,6 +33,7 @@ function Shipping(props) {
     dispatch(submitOrders(data));
     
   }
+
    
 
 
@@ -57,16 +59,16 @@ function Shipping(props) {
         <div className="form-group">
           <label htmlFor="exampleInputPassword1"><b>City</b></label>
         <select value = {address_id} className="form-control" id="address_id" name="address_id" onChange={(e) => setaddress_id(e.target.value)}>
-        <option value="1">Hue</option>
-        <option value="2">Da Nang</option>
-        <option value="3">Quang Tri</option>
-        <option value="4">Thua Thien Hue</option>
+        {city.map((item,key)=>{
+         return  <option value={item.id}>{item.name}</option>
+        })}
+
       </select>
       <br></br>
         </div>
+       { (full_name && street && address_id && phone_number) ?  <button type="submit" className="btn btn-warning">CHECK OUT</button> : null }
 
-
-        <button type="submit" className="btn btn-warning">CHECK OUT</button>
+      
       </form>
  </div>
 

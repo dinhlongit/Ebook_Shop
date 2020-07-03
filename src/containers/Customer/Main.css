@@ -179,8 +179,12 @@
 }
 
 .header__cart {
-	text-align: right;
-	padding-top: 24px;
+    position: fixed;
+    text-align: right;
+    padding-top: 24px;
+    right: 8%;
+	top: -15px;
+	
 }
 
 .header__cart ul {
@@ -224,8 +228,8 @@
 }
 
 .header__cart .header__cart__price {
-	font-size: 14px;
-	color: #6f6f6f;
+	font-size: 20px;
+	color: red;
 	display: inline-block;
 }
 

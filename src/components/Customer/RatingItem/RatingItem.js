@@ -11,6 +11,7 @@ class RatingItem extends React.Component {
      <ReactStars
     count={5}
     value={this.props.rating}
+    edit={false}
     size={50}
     color2={"#ffd700"}
      />

@@ -8,6 +8,7 @@ class UserReview  extends Component {
         <ReactStars
          count={this.props.review.rating}
          value={5}
+         edit={false}
          onChange={this.ratingChanged}
          size={50}
          color2={"#ffd700"}

@@ -234,11 +234,8 @@ button:focus {
   outline: 5px auto -webkit-focus-ring-color;
 }
 
-input,
-button,
-select,
-optgroup,
-textarea {
+input, button, select, optgroup, textarea {
+  box-shadow: 1px 1px 1px #ffb100;
   margin: 0;
   font-family: inherit;
   font-size: inherit;
@@ -7615,6 +7612,8 @@ button.bg-dark:focus {
   margin-left: 3rem !important;
 }
 
+
+
 .p-0 {
   padding: 0 !important;
 }
@@ -7623,6 +7622,7 @@ button.bg-dark:focus {
 .py-0 {
   padding-top: 0 !important;
 }
+
 
 .pr-0,
 .px-0 {
@@ -7736,7 +7736,7 @@ button.bg-dark:focus {
 }
 
 .p-5 {
-  border: 2px solid pink;
+  
   padding: 3rem !important;
 }
 
@@ -9968,7 +9968,7 @@ h3 {
 html,
 body {
   font-family:verdana;
-  background-color: #fdf9f3;
+  background-color: #fcfbfa;
   height: 100%;
 }
 

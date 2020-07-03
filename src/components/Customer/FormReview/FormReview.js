@@ -38,9 +38,6 @@ class FormReview  extends Component {
              rating : newRating,
              product_id :this.props.productId
          },username);
-
-     
-        
       };
 
       handleInputChange = (e) =>{
@@ -53,8 +50,9 @@ class FormReview  extends Component {
             })
         
       }
-    
+
     render() { 
+   
         return (
             <div>
                <div class="form-group">
