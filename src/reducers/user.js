@@ -157,6 +157,8 @@ const initialState = {
       case userConstants.USER_REGISTER_REQUEST:
         return { loading: true };
       case userConstants.USER_REGISTER_SUCCESS:
+        browserHistory.push('/login')
+        window.location.reload();
         return { loading: false, userInfo: action.payload };
       case userConstants.USER_REGISTER_FAIL:
 

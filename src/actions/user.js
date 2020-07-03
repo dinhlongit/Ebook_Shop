@@ -73,6 +73,7 @@ export const register = (user) => async (dispatch) => {
       data
     } = await Axios.post("http://127.0.0.1:8000/api/auth/register", user);
     toastSuccess("Đăng Ký thành công !");
+  
     dispatch({
       type: USER_REGISTER_SUCCESS,
       payload: data
